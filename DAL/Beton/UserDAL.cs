@@ -127,5 +127,23 @@ namespace DAL.Beton
         {
             throw new NotImplementedException();
         }
+
+        public BsonDocument SignIn(string emailOrUserName, string password)
+        {
+            //checking email
+            var filter = Builders<BsonDocument>.Filter.Eq("email", emailOrUserName);
+            var document = _collection.Find<BsonDocument>(filter).FirstOrDefault();
+            if(document == null)
+            {
+                filter = Builders<BsonDocument>.Filter.Eq("userName", emailOrUserName);
+                document = _collection.Find<BsonDocument>(filter).FirstOrDefault();
+                if (document == null)
+                    throw new Exception("There is no one with this Email or userName!");
+            }
+
+            if (document["password"].AsString != password)
+                throw new Exception("WRONG PASSWORD!!!");
+            return document;
+        }
     }
 }

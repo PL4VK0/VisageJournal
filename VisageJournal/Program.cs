@@ -3,10 +3,7 @@ using DTO;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Bson;
 using MongoDB.Driver;
-//"mongodb+srv://saveliukyaroslav:42@somecluster.ws8oo.mongodb.net/";
 IConfiguration config = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("config.json").Build();
-    //"C:\\Users\\Yar\\source\\repos\\VisageJournal\\VisageJournal").AddJsonFile("config.json").Build();
-//Console.WriteLine(Directory.GetCurrentDirectory());
 string connectionString = config.GetConnectionString("VisageJournal");
 
 IMongoClient client = new MongoClient(connectionString);

@@ -1,4 +1,5 @@
 ﻿using DTO;
+using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace DAL.Abstract
         List<User> GetAll();
         User GetByID(int ID);
         bool Update(User user);
-        void Add(User user); 
+        void Add(User user);
+        BsonDocument SignIn(string emailOrUserName, string password);
     }
 }

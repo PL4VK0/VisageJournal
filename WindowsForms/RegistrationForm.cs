@@ -22,10 +22,6 @@ namespace WindowsForms
         public RegistrationForm()
         {
             InitializeComponent();
-        }
-
-        private void RegistrationForm_Load(object sender, EventArgs e)
-        {
             IConfiguration config = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("config.json")
@@ -34,6 +30,10 @@ namespace WindowsForms
             IMongoDatabase db = client.GetDatabase("test");
             IMongoCollection<BsonDocument> userCollecion = db.GetCollection<BsonDocument>("Users");
             uDAL = new UserDAL(userCollecion);
+        }
+
+        private void RegistrationForm_Load(object sender, EventArgs e)
+        {
         }
 
         private void btnEndSignUp_Click(object sender, EventArgs e)
@@ -50,27 +50,28 @@ namespace WindowsForms
             for(int i = 0; i < interestList.Count; i++)
             {
                 if (string.IsNullOrEmpty(interestList[i]))
-                {
-                    interestList.RemoveAt(i);
                     continue;
-                }
                 interestArray.Add(interestList[i].Trim());
             }
             userToRegister.Interests = interestArray;
 
-            try { uDAL.Add(userToRegister); }
+            try 
+            {
+                uDAL.Add(userToRegister);
+                //txtBoxFirstName.Clear();
+                //txtBoxLastName.Clear();
+                //txtBoxUserName.Clear();
+                //txtBoxEmail.Clear();
+                //txtBoxPassword.Clear();
+                //txtBoxInterests.Clear();
+
+                //txtBoxCity.Clear();
+                //txtBoxCountry.Clear();
+                //txtBoxPlanet.Clear();
+                MessageBox.Show("REGISTRATION SUCCESSFUL!","ERROR",MessageBoxButtons.AbortRetryIgnore,MessageBoxIcon.Question);
+                Close();
+            }
             catch(Exception ex) { MessageBox.Show(ex.Message, "REGISTRATION FAILED!", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Hand); }
-
-            txtBoxFirstName.Clear();
-            txtBoxLastName.Clear();
-            txtBoxUserName.Clear();
-            txtBoxEmail.Clear();
-            txtBoxPassword.Clear();
-            txtBoxInterests.Clear();
-
-            txtBoxCity.Clear();
-            txtBoxCountry.Clear();
-            txtBoxPlanet.Clear();
         }
     }
 }

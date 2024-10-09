@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             lblVisageJournal = new Label();
-            btnSignIn = new Button();
+            btnBeginSignIn = new Button();
             btnBeginSignUp = new Button();
             lblNoAccount = new Label();
             SuspendLayout();
@@ -45,17 +45,20 @@
             lblVisageJournal.Text = "VisageJournal";
             lblVisageJournal.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // btnSignIn
+            // btnBeginSignIn
             // 
-            btnSignIn.Location = new Point(311, 189);
-            btnSignIn.Name = "btnSignIn";
-            btnSignIn.Size = new Size(159, 29);
-            btnSignIn.TabIndex = 2;
-            btnSignIn.Text = "Sign In";
-            btnSignIn.UseVisualStyleBackColor = true;
+            btnBeginSignIn.Font = new Font("Arial", 9F, FontStyle.Bold);
+            btnBeginSignIn.Location = new Point(311, 189);
+            btnBeginSignIn.Name = "btnBeginSignIn";
+            btnBeginSignIn.Size = new Size(159, 29);
+            btnBeginSignIn.TabIndex = 2;
+            btnBeginSignIn.Text = "Sign In";
+            btnBeginSignIn.UseVisualStyleBackColor = true;
+            btnBeginSignIn.Click += btnSignIn_Click;
             // 
             // btnBeginSignUp
             // 
+            btnBeginSignUp.Font = new Font("Arial", 9F, FontStyle.Bold);
             btnBeginSignUp.Location = new Point(311, 293);
             btnBeginSignUp.Name = "btnBeginSignUp";
             btnBeginSignUp.Size = new Size(159, 29);
@@ -67,9 +70,10 @@
             // lblNoAccount
             // 
             lblNoAccount.AutoSize = true;
-            lblNoAccount.Location = new Point(296, 270);
+            lblNoAccount.Font = new Font("Old English Text MT", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblNoAccount.Location = new Point(280, 266);
             lblNoAccount.Name = "lblNoAccount";
-            lblNoAccount.Size = new Size(187, 20);
+            lblNoAccount.Size = new Size(236, 24);
             lblNoAccount.TabIndex = 4;
             lblNoAccount.Text = "Don't have an account yet?";
             // 
@@ -82,9 +86,11 @@
             ClientSize = new Size(800, 450);
             Controls.Add(lblNoAccount);
             Controls.Add(btnBeginSignUp);
-            Controls.Add(btnSignIn);
+            Controls.Add(btnBeginSignIn);
             Controls.Add(lblVisageJournal);
+            FormBorderStyle = FormBorderStyle.Fixed3D;
             Name = "VJ";
+            SizeGripStyle = SizeGripStyle.Hide;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "VisageJournal";
             Load += Form1_Load;
@@ -95,7 +101,7 @@
         #endregion
 
         private Label lblVisageJournal;
-        private Button btnSignIn;
+        private Button btnBeginSignIn;
         private Button btnBeginSignUp;
         private Label lblNoAccount;
     }
