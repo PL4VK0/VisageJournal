@@ -9,38 +9,58 @@ string connectionString = config.GetConnectionString("VisageJournal");
 IMongoClient client = new MongoClient(connectionString);
 
 IMongoDatabase db = client.GetDatabase("test");
+//db.CreateCollection("Comments");
+var userCollection = db.GetCollection<BsonDocument>("Users");
+var postCollection = db.GetCollection<BsonDocument>("Posts");
+var commentCollection = db.GetCollection<BsonDocument>("Comments");
+UserDAL uDal = new UserDAL(userCollection);
 
-var collection = db.GetCollection<BsonDocument>("Users");
+PostDAL postDAL = new PostDAL(postCollection);
 
-UserDAL dal = new UserDAL(collection);
+CommentDAL commentDAL = new CommentDAL(commentCollection);
 
-
-
-try
+Comment comment = new Comment
 {
-    dal.Follow(1, 1);
-}catch(Exception ex)
-{
-    Console.WriteLine(ex.Message);
-}
-    //User user = new User
-    //{
-    //    FirstName = "Pasha",
-    //    LastName = "Ahsap",
-    //    Email = "email@gmail.com",
-    //    Password = "password",
-    //    UserName = "Mitsu",
-    //    Interests = new BsonArray
-    //    {
-    //        {"Hacking"},
-    //        {"Jogging" },
-    //        {"Joking" },
-    //        {"Running" }
-    //    }
-    //};
-    //dal.Add(user);
+    PostID = 1,
+    CommentText = "testComment",
+    CommentatorID = 1,
+    Upvotes = new BsonArray(1),
+    DownVotes = new BsonArray(2)
+};
 
-    Console.WriteLine(dal.GetByID(2));
+commentDAL.Add(comment);
+//Post post = new Post
+//{
+//    PosterID = 1,
+//    PostText = "testText",
+//    PostTitle = "testTitle"
+//};
+//postDAL.Add(post);
+//try
+//{
+//    dal.Follow(1, 1);
+//}catch(Exception ex)
+//{
+//    Console.WriteLine(ex.Message);
+//}
+//User user = new User
+//{
+//    FirstName = "Pasha",
+//    LastName = "Ahsap",
+//    Email = "email@gmail.com",
+//    Password = "password",
+//    UserName = "Mitsu",
+//    Interests = new BsonArray
+//    {
+//        {"Hacking"},
+//        {"Jogging" },
+//        {"Joking" },
+//        {"Running" }
+//    }
+//};
+//dal.Add(user);
+return;
+    //Console.WriteLine(uDal.GetByID(2));
 
 //var somethign = new BsonDocument
 //{

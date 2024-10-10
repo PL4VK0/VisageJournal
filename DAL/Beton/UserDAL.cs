@@ -36,8 +36,10 @@ namespace DAL.Beton
 
             filter = Builders<BsonDocument>.Filter.Empty;
             var sort = Builders<BsonDocument>.Sort.Descending("_id");
-            var newID = _collection.Find(filter).Sort(sort).FirstOrDefault()["_id"].AsInt32 + 1;
-
+            var lastUser = _collection.Find<BsonDocument>(filter).Sort(sort).FirstOrDefault();
+            var newID = 1;
+            if (lastUser != null)
+                newID = lastUser["_id"].AsInt32 + 1;
             BsonDocument newUser = new BsonDocument
             {
                 { "_id",newID },

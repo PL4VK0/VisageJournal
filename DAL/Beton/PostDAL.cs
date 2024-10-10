@@ -23,10 +23,14 @@ namespace DAL.Beton
                 .Find(filter)
                 .Sort(sort)
                 .FirstOrDefault();
-            var newID = document["_id"].AsInt32 + 1;
+
+
+            int newID = 1;
+            if (document != null)
+                newID = document["_id"].AsInt32 + 1;
             BsonDocument newPost = new BsonDocument
             {
-                {"postID",newID },
+                {"_id",newID },
                 {"posterID",post.PosterID },
                 {"postTitle",post.PostTitle },
                 {"postText",post.PostText },
