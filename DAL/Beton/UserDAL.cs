@@ -135,15 +135,43 @@ namespace DAL.Beton
             var document = _collection.Find<BsonDocument>(filter).FirstOrDefault();
             if(document == null)
             {
+                //checking uN
                 filter = Builders<BsonDocument>.Filter.Eq("userName", emailOrUserName);
                 document = _collection.Find<BsonDocument>(filter).FirstOrDefault();
                 if (document == null)
-                    throw new Exception("There is no one with this Email or userName!");
+                    throw new Exception("There is no one with this Email or UserName!");
             }
 
             if (document["password"].AsString != password)
                 throw new Exception("WRONG PASSWORD!!!");
             return document;
+        }
+
+        public void Follow(int idThatFollows, int idToFollow)
+        {
+            var filterThatFollows = Builders<BsonDocument>.Filter.Eq("_id", idThatFollows);
+            var docThatFollows = _collection.Find(filterThatFollows).FirstOrDefault();
+            if (docThatFollows == null)
+                throw new Exception("The unexisting user is trying to follow someone");
+            if (idThatFollows == idToFollow)
+                throw new Exception("You can't follow yourself! (but you can follow your dreams...)");
+            if (docThatFollows["followingIDs"].AsBsonArray.Contains(idToFollow))
+                throw new Exception("This user is already followed by you!");
+
+            var filterToFollow = Builders<BsonDocument>.Filter.Eq("_id", idToFollow);
+            var docToFollow = _collection.Find(filterToFollow).FirstOrDefault();
+            if (docToFollow == null)
+                throw new Exception("You can't follow an unexisting user!");
+            BsonArray followingIDs = docThatFollows["followingIDs"].AsBsonArray;
+            BsonArray followerIDs = docToFollow["followerIDs"].AsBsonArray;
+
+            followingIDs.Add(idToFollow);
+            followerIDs.Add(idThatFollows);
+            var updateThatFollows = Builders<BsonDocument>.Update.Set("followingIDs", followingIDs);
+            var updateToFollow = Builders<BsonDocument>.Update.Set("followerIDs", followerIDs);
+
+            _collection.UpdateOne(filterThatFollows, updateThatFollows);
+            _collection.UpdateOne(filterToFollow, updateToFollow);
         }
     }
 }

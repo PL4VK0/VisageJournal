@@ -15,24 +15,32 @@ var collection = db.GetCollection<BsonDocument>("Users");
 UserDAL dal = new UserDAL(collection);
 
 
-//User user = new User
-//{
-//    FirstName = "Pasha",
-//    LastName = "Ahsap",
-//    Email = "email@gmail.com",
-//    Password = "password",
-//    UserName = "Mitsu",
-//    Interests = new BsonArray
-//    {
-//        {"Hacking"},
-//        {"Jogging" },
-//        {"Joking" },
-//        {"Running" }
-//    }
-//};
-//dal.Add(user);
 
-Console.WriteLine(dal.GetByID(2));
+try
+{
+    dal.Follow(1, 1);
+}catch(Exception ex)
+{
+    Console.WriteLine(ex.Message);
+}
+    //User user = new User
+    //{
+    //    FirstName = "Pasha",
+    //    LastName = "Ahsap",
+    //    Email = "email@gmail.com",
+    //    Password = "password",
+    //    UserName = "Mitsu",
+    //    Interests = new BsonArray
+    //    {
+    //        {"Hacking"},
+    //        {"Jogging" },
+    //        {"Joking" },
+    //        {"Running" }
+    //    }
+    //};
+    //dal.Add(user);
+
+    Console.WriteLine(dal.GetByID(2));
 
 //var somethign = new BsonDocument
 //{

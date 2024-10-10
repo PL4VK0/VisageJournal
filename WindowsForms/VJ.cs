@@ -43,6 +43,9 @@ namespace WindowsForms
             SignInForm signInForm = new SignInForm();
             signInForm.ShowDialog();
             user = signInForm.signedIn;
+            if(user==null)
+                return;
+            MessageBox.Show($"SIGNED IN AS {user["userName"].AsString}!!!", "SING A SONG");
         }
     }
 }

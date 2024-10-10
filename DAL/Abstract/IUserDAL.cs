@@ -16,5 +16,7 @@ namespace DAL.Abstract
         bool Update(User user);
         void Add(User user);
         BsonDocument SignIn(string emailOrUserName, string password);
+
+        void Follow(int idThatFollows, int idToFollow);
     }
 }
