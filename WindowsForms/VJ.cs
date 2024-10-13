@@ -1,3 +1,4 @@
+using BusinessLogic;
 using DAL.Beton;
 using DTO;
 using Microsoft.Extensions.Configuration;
@@ -7,8 +8,7 @@ namespace WindowsForms
 {
     public partial class VJ : Form
     {
-        public static User user;
-        public static UserDAL uDAL;
+        public static UserOptions userOptions;
         public VJ()
         {
             InitializeComponent();
@@ -19,7 +19,13 @@ namespace WindowsForms
             IMongoClient client = new MongoClient(config.GetConnectionString("VisageJournal"));
             IMongoDatabase db = client.GetDatabase("test");
             IMongoCollection<User> userCollecion = db.GetCollection<User>("Users");
-            uDAL = new UserDAL(userCollecion);
+            IMongoCollection<Post> postCollection = db.GetCollection<Post>("Posts");
+            IMongoCollection<Comment> commentCollection = db.GetCollection<Comment>("Comments");
+
+            //UserDAL uDAL = new UserDAL(userCollecion);
+            //PostDAL pDAL= new PostDAL(postCollection);
+            //CommentDAL cDAL  = new CommentDAL(commentCollection
+            userOptions = new UserOptions(userCollecion, postCollection, commentCollection);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -43,9 +49,9 @@ namespace WindowsForms
             SignInForm signInForm = new SignInForm();
             signInForm.ShowDialog();
             //user = signInForm.signedIn;
-            if(user==null)
+            if(userOptions.GetUser()==null)
                 return;
-            MessageBox.Show($"SIGNED IN AS {user.UserName}!!!", "SING A SONG");
+            MessageBox.Show($"SIGNED IN AS {userOptions.GetUser().UserName}!!!", "SING A SONG");
             lblNoAccount.Hide();
             btnBeginSignIn.Hide();
             btnBeginSignUp.Hide();

@@ -1,4 +1,5 @@
-﻿using DAL.Beton;
+﻿using BusinessLogic;
+using DAL.Beton;
 using DTO;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Bson;
@@ -60,7 +61,7 @@ namespace WindowsForms
 
             try 
             {
-                VJ.uDAL.Add(userToRegister);
+                VJ.userOptions.SignUp(userToRegister);
                 //txtBoxFirstName.Clear();
                 //txtBoxLastName.Clear();
                 //txtBoxUserName.Clear();

@@ -1,4 +1,5 @@
-﻿using DAL.Beton;
+﻿using BusinessLogic;
+using DAL.Beton;
 using DTO;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Bson;
@@ -21,14 +22,6 @@ namespace WindowsForms
         public SignInForm()
         {
             InitializeComponent();
-        //    IConfiguration config = new ConfigurationBuilder()
-        //.SetBasePath(Directory.GetCurrentDirectory())
-        //.AddJsonFile("config.json")
-        //.Build();
-        //    IMongoClient client = new MongoClient(config.GetConnectionString("VisageJournal"));
-        //    IMongoDatabase db = client.GetDatabase("test");
-        //    IMongoCollection<User> userCollecion = db.GetCollection<User>("Users");
-        //    uDAL = new UserDAL(userCollecion);
         }
 
         private void SignInForm_Load(object sender, EventArgs e)
@@ -42,7 +35,7 @@ namespace WindowsForms
             string password = txtBoxPassword.Text;
             try
             {
-                VJ.user = VJ.uDAL.SignIn(emailOrUserName, password);
+                VJ.userOptions.SignIn(emailOrUserName, password);
                 MessageBox.Show("SIGN IN SUCCESSFUL!", "NO ERROR", MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Question);
                 Close();
             }
