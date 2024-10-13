@@ -31,7 +31,15 @@
 
         private void btnEndUnRegister_Click(object sender, EventArgs e)
         {
+            if(textBoxPassword.Text!=VJ.userOptions.GetUser().Password)
+            {
+                MessageBox.Show("WRONG PASSWORD!","you're staying with us",MessageBoxButtons.RetryCancel, MessageBoxIcon.Question);
+                return;
+            }
             VJ.userOptions.SignDown();
+            MessageBox.Show("goodbye(","i'm not crying...");
+            MessageBox.Show("the application will self-destruct after your choice");
+            Application.Exit();
         }
     }
 }
