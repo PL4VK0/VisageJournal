@@ -10,25 +10,25 @@ IMongoClient client = new MongoClient(connectionString);
 
 IMongoDatabase db = client.GetDatabase("test");
 //db.CreateCollection("Comments");
-var userCollection = db.GetCollection<BsonDocument>("Users");
-var postCollection = db.GetCollection<BsonDocument>("Posts");
-var commentCollection = db.GetCollection<BsonDocument>("Comments");
+var userCollection = db.GetCollection<User>("Users");
+var postCollection = db.GetCollection<Post>("Posts");
+var commentCollection = db.GetCollection<Comment>("Comments");
 UserDAL uDal = new UserDAL(userCollection);
 
 PostDAL postDAL = new PostDAL(postCollection);
 
 CommentDAL commentDAL = new CommentDAL(commentCollection);
 
-Comment comment = new Comment
-{
-    PostID = 1,
-    CommentText = "testComment",
-    CommentatorID = 1,
-    Upvotes = new BsonArray(1),
-    DownVotes = new BsonArray(2)
-};
+//Comment comment = new Comment
+//{
+//    PostID = 1,
+//    CommentText = "testComment",
+//    CommentatorID = 1,
+//    UpVotes = new BsonArray(1),
+//    DownVotes = new BsonArray(2)
+//};
 
-commentDAL.Add(comment);
+//commentDAL.Add(comment);
 //Post post = new Post
 //{
 //    PosterID = 1,

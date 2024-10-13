@@ -4,10 +4,10 @@ namespace DAL.Abstract
 {
     public interface ICommentDAL
     {
-        bool DeleteByID(int ID);
+        void DeleteByID(string ID);
         List<Comment> GetAll();
-        Comment GetByID(int ID);
-        bool Update(Comment comment);
+        Comment GetByID(string ID);
+        void Update(Comment comment);
         void Add(Comment comment);
     }
 }

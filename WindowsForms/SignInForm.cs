@@ -17,19 +17,18 @@ namespace WindowsForms
 {
     public partial class SignInForm : Form
     {
-        UserDAL uDAL;
-        public BsonDocument signedIn;
+
         public SignInForm()
         {
             InitializeComponent();
-            IConfiguration config = new ConfigurationBuilder()
-        .SetBasePath(Directory.GetCurrentDirectory())
-        .AddJsonFile("config.json")
-        .Build();
-            IMongoClient client = new MongoClient(config.GetConnectionString("VisageJournal"));
-            IMongoDatabase db = client.GetDatabase("test");
-            IMongoCollection<BsonDocument> userCollecion = db.GetCollection<BsonDocument>("Users");
-            uDAL = new UserDAL(userCollecion);
+        //    IConfiguration config = new ConfigurationBuilder()
+        //.SetBasePath(Directory.GetCurrentDirectory())
+        //.AddJsonFile("config.json")
+        //.Build();
+        //    IMongoClient client = new MongoClient(config.GetConnectionString("VisageJournal"));
+        //    IMongoDatabase db = client.GetDatabase("test");
+        //    IMongoCollection<User> userCollecion = db.GetCollection<User>("Users");
+        //    uDAL = new UserDAL(userCollecion);
         }
 
         private void SignInForm_Load(object sender, EventArgs e)
@@ -43,7 +42,7 @@ namespace WindowsForms
             string password = txtBoxPassword.Text;
             try
             {
-                signedIn = uDAL.SignIn(emailOrUserName, password);
+                VJ.user = VJ.uDAL.SignIn(emailOrUserName, password);
                 MessageBox.Show("SIGN IN SUCCESSFUL!", "NO ERROR", MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Question);
                 Close();
             }

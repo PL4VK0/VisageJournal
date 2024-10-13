@@ -17,23 +17,26 @@ namespace WindowsForms
 {
     public partial class RegistrationForm : Form
     {
-        UserDAL uDAL;
+        //UserDAL uDAL;
 
         public RegistrationForm()
         {
             InitializeComponent();
-            IConfiguration config = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("config.json")
-                .Build();
-            IMongoClient client = new MongoClient(config.GetConnectionString("VisageJournal"));
-            IMongoDatabase db = client.GetDatabase("test");
-            IMongoCollection<BsonDocument> userCollecion = db.GetCollection<BsonDocument>("Users");
-            uDAL = new UserDAL(userCollecion);
+            //IConfiguration config = new ConfigurationBuilder()
+            //    .SetBasePath(Directory.GetCurrentDirectory())
+            //    .AddJsonFile("config.json")
+            //    .Build();
+            //IMongoClient client = new MongoClient(config.GetConnectionString("VisageJournal"));
+            //IMongoDatabase db = client.GetDatabase("test");
+            //IMongoCollection<BsonDocument> userCollecion = db.GetCollection<BsonDocument>("Users");
+
+
+            //uDAL = new UserDAL(userCollecion);
         }
 
         private void RegistrationForm_Load(object sender, EventArgs e)
         {
+            
         }
 
         private void btnEndSignUp_Click(object sender, EventArgs e)
@@ -57,7 +60,7 @@ namespace WindowsForms
 
             try 
             {
-                uDAL.Add(userToRegister);
+                VJ.uDAL.Add(userToRegister);
                 //txtBoxFirstName.Clear();
                 //txtBoxLastName.Clear();
                 //txtBoxUserName.Clear();

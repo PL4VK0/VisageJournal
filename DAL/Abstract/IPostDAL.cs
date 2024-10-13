@@ -5,10 +5,10 @@ namespace DAL.Abstract
 {
     public interface IPostDAL
     {
-        bool DeleteByID(int ID);
+        void DeleteByID(string ID);
         List<Post> GetAll();
-        Post GetByID(int ID);
-        bool Update(Post post);
+        Post GetByID(string ID);
+        void Update(Post post);
         void Add(Post post);
     }
 }

@@ -10,13 +10,13 @@ namespace DAL.Abstract
 {
     public interface IUserDAL
     {
-        bool DeleteByID(int ID);
+        void DeleteByID(string ID);
         List<User> GetAll();
-        User GetByID(int ID);
-        bool Update(User user);
+        User GetByID(string ID);
+        void Update(User user);
         void Add(User user);
-        BsonDocument SignIn(string emailOrUserName, string password);
+        User SignIn(string emailOrUserName, string password);
 
-        void Follow(int idThatFollows, int idToFollow);
+        void Follow(string idThatFollows, string idToFollow);
     }
 }

@@ -32,6 +32,10 @@
             btnBeginSignIn = new Button();
             btnBeginSignUp = new Button();
             lblNoAccount = new Label();
+            dgvPosts = new DataGridView();
+            btnBeginPost = new Button();
+            btnMyProfile = new Button();
+            ((System.ComponentModel.ISupportInitialize)dgvPosts).BeginInit();
             SuspendLayout();
             // 
             // lblVisageJournal
@@ -77,6 +81,35 @@
             lblNoAccount.TabIndex = 4;
             lblNoAccount.Text = "Don't have an account yet?";
             // 
+            // dgvPosts
+            // 
+            dgvPosts.BackgroundColor = SystemColors.ButtonFace;
+            dgvPosts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvPosts.Location = new Point(12, 134);
+            dgvPosts.Name = "dgvPosts";
+            dgvPosts.RowHeadersWidth = 51;
+            dgvPosts.Size = new Size(458, 247);
+            dgvPosts.TabIndex = 5;
+            // 
+            // btnBeginPost
+            // 
+            btnBeginPost.Font = new Font("Arial Narrow", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            btnBeginPost.Location = new Point(600, 134);
+            btnBeginPost.Name = "btnBeginPost";
+            btnBeginPost.Size = new Size(148, 34);
+            btnBeginPost.TabIndex = 6;
+            btnBeginPost.Text = "Post Something!";
+            btnBeginPost.UseVisualStyleBackColor = true;
+            // 
+            // btnMyProfile
+            // 
+            btnMyProfile.Font = new Font("Arial Narrow", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            btnMyProfile.Location = new Point(12, 94);
+            btnMyProfile.Name = "btnMyProfile";
+            btnMyProfile.Size = new Size(148, 34);
+            btnMyProfile.TabIndex = 7;
+            btnMyProfile.UseVisualStyleBackColor = true;
+            // 
             // VJ
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -84,6 +117,9 @@
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = SystemColors.ActiveCaption;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnMyProfile);
+            Controls.Add(btnBeginPost);
+            Controls.Add(dgvPosts);
             Controls.Add(lblNoAccount);
             Controls.Add(btnBeginSignUp);
             Controls.Add(btnBeginSignIn);
@@ -94,6 +130,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "VisageJournal";
             Load += Form1_Load;
+            ((System.ComponentModel.ISupportInitialize)dgvPosts).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -104,5 +141,8 @@
         private Button btnBeginSignIn;
         private Button btnBeginSignUp;
         private Label lblNoAccount;
+        private DataGridView dgvPosts;
+        private Button btnBeginPost;
+        private Button btnMyProfile;
     }
 }

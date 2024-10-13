@@ -1,16 +1,14 @@
 using DAL.Beton;
 using DTO;
 using Microsoft.Extensions.Configuration;
-using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace WindowsForms
 {
     public partial class VJ : Form
     {
-
-        BsonDocument user;
-        UserDAL uDAL;
+        public static User user;
+        public static UserDAL uDAL;
         public VJ()
         {
             InitializeComponent();
@@ -20,13 +18,15 @@ namespace WindowsForms
                 .Build();
             IMongoClient client = new MongoClient(config.GetConnectionString("VisageJournal"));
             IMongoDatabase db = client.GetDatabase("test");
-            IMongoCollection<BsonDocument> userCollecion = db.GetCollection<BsonDocument>("Users");
+            IMongoCollection<User> userCollecion = db.GetCollection<User>("Users");
             uDAL = new UserDAL(userCollecion);
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            btnMyProfile.Hide();
+            dgvPosts.Hide();
+            btnBeginPost.Hide();
         }
 
         private void btnSignUp_Click(object sender, EventArgs e)
@@ -42,10 +42,15 @@ namespace WindowsForms
         {
             SignInForm signInForm = new SignInForm();
             signInForm.ShowDialog();
-            user = signInForm.signedIn;
+            //user = signInForm.signedIn;
             if(user==null)
                 return;
-            MessageBox.Show($"SIGNED IN AS {user["userName"].AsString}!!!", "SING A SONG");
+            MessageBox.Show($"SIGNED IN AS {user.UserName}!!!", "SING A SONG");
+            lblNoAccount.Hide();
+            btnBeginSignIn.Hide();
+            btnBeginSignUp.Hide();
+
         }
+        //private void 
     }
 }
