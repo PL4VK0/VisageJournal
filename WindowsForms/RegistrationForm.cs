@@ -1,38 +1,16 @@
-﻿using BusinessLogic;
-using DAL.Beton;
-using DTO;
-using Microsoft.Extensions.Configuration;
+﻿using DTO;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace WindowsForms
 {
     public partial class RegistrationForm : Form
     {
-        //UserDAL uDAL;
+        
 
         public RegistrationForm()
         {
             InitializeComponent();
-            //IConfiguration config = new ConfigurationBuilder()
-            //    .SetBasePath(Directory.GetCurrentDirectory())
-            //    .AddJsonFile("config.json")
-            //    .Build();
-            //IMongoClient client = new MongoClient(config.GetConnectionString("VisageJournal"));
-            //IMongoDatabase db = client.GetDatabase("test");
-            //IMongoCollection<BsonDocument> userCollecion = db.GetCollection<BsonDocument>("Users");
-
-
-            //uDAL = new UserDAL(userCollecion);
         }
 
         private void RegistrationForm_Load(object sender, EventArgs e)
@@ -62,16 +40,6 @@ namespace WindowsForms
             try 
             {
                 VJ.userOptions.SignUp(userToRegister);
-                //txtBoxFirstName.Clear();
-                //txtBoxLastName.Clear();
-                //txtBoxUserName.Clear();
-                //txtBoxEmail.Clear();
-                //txtBoxPassword.Clear();
-                //txtBoxInterests.Clear();
-
-                //txtBoxCity.Clear();
-                //txtBoxCountry.Clear();
-                //txtBoxPlanet.Clear();
                 MessageBox.Show("REGISTRATION SUCCESSFUL!","ERROR",MessageBoxButtons.AbortRetryIgnore,MessageBoxIcon.Question);
                 Close();
             }

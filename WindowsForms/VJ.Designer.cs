@@ -33,7 +33,6 @@
             btnBeginSignUp = new Button();
             lblNoAccount = new Label();
             dgvPosts = new DataGridView();
-            btnBeginPost = new Button();
             btnMyProfile = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvPosts).BeginInit();
             SuspendLayout();
@@ -91,16 +90,6 @@
             dgvPosts.Size = new Size(458, 247);
             dgvPosts.TabIndex = 5;
             // 
-            // btnBeginPost
-            // 
-            btnBeginPost.Font = new Font("Arial Narrow", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            btnBeginPost.Location = new Point(600, 134);
-            btnBeginPost.Name = "btnBeginPost";
-            btnBeginPost.Size = new Size(148, 34);
-            btnBeginPost.TabIndex = 6;
-            btnBeginPost.Text = "Post Something!";
-            btnBeginPost.UseVisualStyleBackColor = true;
-            // 
             // btnMyProfile
             // 
             btnMyProfile.Font = new Font("Arial Narrow", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
@@ -109,6 +98,7 @@
             btnMyProfile.Size = new Size(148, 34);
             btnMyProfile.TabIndex = 7;
             btnMyProfile.UseVisualStyleBackColor = true;
+            btnMyProfile.Click += btnMyProfile_Click;
             // 
             // VJ
             // 
@@ -118,7 +108,6 @@
             BackColor = SystemColors.ActiveCaption;
             ClientSize = new Size(800, 450);
             Controls.Add(btnMyProfile);
-            Controls.Add(btnBeginPost);
             Controls.Add(dgvPosts);
             Controls.Add(lblNoAccount);
             Controls.Add(btnBeginSignUp);
@@ -142,7 +131,6 @@
         private Button btnBeginSignUp;
         private Label lblNoAccount;
         private DataGridView dgvPosts;
-        private Button btnBeginPost;
         private Button btnMyProfile;
     }
 }

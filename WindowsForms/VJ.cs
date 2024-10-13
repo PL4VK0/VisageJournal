@@ -32,7 +32,6 @@ namespace WindowsForms
         {
             btnMyProfile.Hide();
             dgvPosts.Hide();
-            btnBeginPost.Hide();
         }
 
         private void btnSignUp_Click(object sender, EventArgs e)
@@ -49,14 +48,25 @@ namespace WindowsForms
             SignInForm signInForm = new SignInForm();
             signInForm.ShowDialog();
             //user = signInForm.signedIn;
-            if(userOptions.GetUser()==null)
+            if (userOptions.GetUser() == null)
                 return;
             MessageBox.Show($"SIGNED IN AS {userOptions.GetUser().UserName}!!!", "SING A SONG");
+            ShowMyPage();
+        }
+        private void ShowMyPage()
+        {
             lblNoAccount.Hide();
             btnBeginSignIn.Hide();
             btnBeginSignUp.Hide();
-
+            dgvPosts.Show();
+            btnMyProfile.Show();
+            btnMyProfile.Text = userOptions.GetUser().UserName;
         }
-        //private void 
+
+        private void btnMyProfile_Click(object sender, EventArgs e)
+        {
+            MyProfile myProfile = new MyProfile();
+            myProfile.ShowDialog();
+        }
     }
 }

@@ -26,9 +26,10 @@ namespace BusinessLogic
         }
         public User GetUser() 
         { return user; }
-
         public void SignUp(User user)
         { userDAL.Add(user); }
+
+
         public void SignIn(string emailOrUserName, string password)
         {
             //checking email
@@ -45,6 +46,9 @@ namespace BusinessLogic
                 throw new Exception("WRONG PASSWORD!!!");
             user = userToSignIn;
         }
+
+
+
         public void Follow(string idThatFollows, string idToFollow)
         {
             User userThatFollows = userCollection.Find(u => u.UserID == idThatFollows).FirstOrDefault();
@@ -70,6 +74,19 @@ namespace BusinessLogic
                 .Set(u => u.FollowerIDs, userToFollow.FollowerIDs);
             userCollection.UpdateOne(userThatFollows.UserID, updateThatFollows);
             userCollection.UpdateOne(userToFollow.UserID, updateToFollow);
+        }
+
+
+        public List<Post> GetAllPostsFromThisUser(string userID)
+        { return postCollection.Find(p=>p.PosterID == userID).ToList(); }
+
+        public void NewPostFromThisUser(string postTitle, string postText)
+        {
+            Post newPost = new Post();
+            newPost.PosterID = user.UserID;
+            newPost.PostTitle = postTitle;
+            newPost.PostText = postText;
+            postDAL.Add(newPost);
         }
     }
 }
