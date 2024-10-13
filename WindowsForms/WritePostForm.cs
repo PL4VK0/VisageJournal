@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace WindowsForms
 {
-    public partial class PostForm : Form
+    public partial class WritePostForm : Form
     {
-        public PostForm()
+        public WritePostForm()
         {
             InitializeComponent();
         }

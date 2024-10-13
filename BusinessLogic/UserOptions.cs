@@ -88,5 +88,9 @@ namespace BusinessLogic
             newPost.PostText = postText;
             postDAL.Add(newPost);
         }
+        public void SignDown()
+        {
+            somme errors for you
+        }
     }
 }

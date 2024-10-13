@@ -1,6 +1,6 @@
 ﻿namespace WindowsForms
 {
-    partial class PostForm
+    partial class WritePostForm
     {
         /// <summary>
         /// Required designer variable.

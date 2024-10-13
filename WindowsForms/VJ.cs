@@ -65,8 +65,8 @@ namespace WindowsForms
 
         private void btnMyProfile_Click(object sender, EventArgs e)
         {
-            MyProfile myProfile = new MyProfile();
-            myProfile.ShowDialog();
+            ProfileForm profile = new ProfileForm();
+            profile.ShowDialog();
         }
     }
 }

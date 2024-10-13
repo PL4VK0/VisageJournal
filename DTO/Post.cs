@@ -21,5 +21,7 @@ namespace DTO
         public BsonArray UpVotes { get; set; } = new BsonArray();
         [BsonElement("downVotes")]
         public BsonArray DownVotes { get; set; } = new BsonArray();
+        [BsonElement("date")]
+        public DateTime Date { get; set; } = DateTime.UtcNow;
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace WindowsForms
 {
-    partial class MyProfile
+    partial class ProfileForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,12 +29,13 @@
         private void InitializeComponent()
         {
             lblUserName = new Label();
-            dgvMyPosts = new DataGridView();
-            lblMyProfile = new Label();
+            dgvUserPosts = new DataGridView();
+            lblProfileName = new Label();
             btnDeleteAccount = new Button();
-            lblYourPosts = new Label();
+            lblUserPosts = new Label();
             btnBeginPost = new Button();
-            ((System.ComponentModel.ISupportInitialize)dgvMyPosts).BeginInit();
+            btnDeletePosts = new Button();
+            ((System.ComponentModel.ISupportInitialize)dgvUserPosts).BeginInit();
             SuspendLayout();
             // 
             // lblUserName
@@ -44,43 +45,48 @@
             lblUserName.Size = new Size(100, 23);
             lblUserName.TabIndex = 2;
             // 
-            // dgvMyPosts
+            // dgvUserPosts
             // 
-            dgvMyPosts.BackgroundColor = SystemColors.Control;
-            dgvMyPosts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvMyPosts.Location = new Point(12, 130);
-            dgvMyPosts.Name = "dgvMyPosts";
-            dgvMyPosts.RowHeadersWidth = 51;
-            dgvMyPosts.Size = new Size(664, 188);
-            dgvMyPosts.TabIndex = 1;
+            dgvUserPosts.AllowUserToAddRows = false;
+            dgvUserPosts.AllowUserToDeleteRows = false;
+            dgvUserPosts.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dgvUserPosts.BackgroundColor = SystemColors.Control;
+            dgvUserPosts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvUserPosts.Location = new Point(12, 130);
+            dgvUserPosts.Name = "dgvUserPosts";
+            dgvUserPosts.ReadOnly = true;
+            dgvUserPosts.RowHeadersWidth = 51;
+            dgvUserPosts.Size = new Size(664, 188);
+            dgvUserPosts.TabIndex = 1;
             // 
-            // lblMyProfile
+            // lblProfileName
             // 
-            lblMyProfile.AutoSize = true;
-            lblMyProfile.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
-            lblMyProfile.Location = new Point(12, 23);
-            lblMyProfile.Name = "lblMyProfile";
-            lblMyProfile.Size = new Size(113, 25);
-            lblMyProfile.TabIndex = 3;
-            lblMyProfile.Text = "UserName";
+            lblProfileName.AutoSize = true;
+            lblProfileName.Font = new Font("Old London", 13F, FontStyle.Bold);
+            lblProfileName.Location = new Point(12, 23);
+            lblProfileName.Name = "lblProfileName";
+            lblProfileName.Size = new Size(106, 25);
+            lblProfileName.TabIndex = 3;
+            lblProfileName.Text = "UserName";
             // 
             // btnDeleteAccount
             // 
-            btnDeleteAccount.Location = new Point(571, 458);
+            btnDeleteAccount.Location = new Point(13, 458);
             btnDeleteAccount.Name = "btnDeleteAccount";
             btnDeleteAccount.Size = new Size(105, 29);
             btnDeleteAccount.TabIndex = 4;
             btnDeleteAccount.Text = "unregister?";
             btnDeleteAccount.UseVisualStyleBackColor = true;
+            btnDeleteAccount.Click += btnDeleteAccount_Click;
             // 
-            // lblYourPosts
+            // lblUserPosts
             // 
-            lblYourPosts.AutoSize = true;
-            lblYourPosts.Location = new Point(12, 109);
-            lblYourPosts.Name = "lblYourPosts";
-            lblYourPosts.Size = new Size(92, 18);
-            lblYourPosts.TabIndex = 5;
-            lblYourPosts.Text = "Your Posts";
+            lblUserPosts.AutoSize = true;
+            lblUserPosts.Location = new Point(12, 109);
+            lblUserPosts.Name = "lblUserPosts";
+            lblUserPosts.Size = new Size(88, 18);
+            lblUserPosts.TabIndex = 5;
+            lblUserPosts.Text = "UserPosts";
             // 
             // btnBeginPost
             // 
@@ -93,24 +99,34 @@
             btnBeginPost.UseVisualStyleBackColor = true;
             btnBeginPost.Click += btnBeginPost_Click;
             // 
-            // MyProfile
+            // btnDeletePosts
+            // 
+            btnDeletePosts.Location = new Point(490, 98);
+            btnDeletePosts.Name = "btnDeletePosts";
+            btnDeletePosts.Size = new Size(186, 29);
+            btnDeletePosts.TabIndex = 8;
+            btnDeletePosts.Text = "DeleteSelectedPosts";
+            btnDeletePosts.UseVisualStyleBackColor = true;
+            // 
+            // ProfileForm
             // 
             AutoScaleDimensions = new SizeF(10F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaption;
             ClientSize = new Size(688, 499);
+            Controls.Add(btnDeletePosts);
             Controls.Add(btnBeginPost);
-            Controls.Add(lblYourPosts);
+            Controls.Add(lblUserPosts);
             Controls.Add(btnDeleteAccount);
-            Controls.Add(lblMyProfile);
-            Controls.Add(dgvMyPosts);
+            Controls.Add(lblProfileName);
+            Controls.Add(dgvUserPosts);
             Controls.Add(lblUserName);
             Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold);
-            Name = "MyProfile";
+            Name = "ProfileForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "MyProfile";
-            Load += MyProfile_Load;
-            ((System.ComponentModel.ISupportInitialize)dgvMyPosts).EndInit();
+            Text = "VJ Profile";
+            Load += ProfileForm_Load;
+            ((System.ComponentModel.ISupportInitialize)dgvUserPosts).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -118,10 +134,11 @@
         #endregion
 
         private Label lblUserName;
-        private DataGridView dgvMyPosts;
-        private Label lblMyProfile;
+        private DataGridView dgvUserPosts;
+        private Label lblProfileName;
         private Button btnDeleteAccount;
-        private Label lblYourPosts;
+        private Label lblUserPosts;
         private Button btnBeginPost;
+        private Button btnDeletePosts;
     }
 }
