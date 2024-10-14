@@ -32,7 +32,7 @@
             lblPostText = new Label();
             btnEndPost = new Button();
             textBoxPostTitle = new TextBox();
-            textBoxPostText = new TextBox();
+            richTextBoxPostText = new RichTextBox();
             SuspendLayout();
             // 
             // lblPostTitle
@@ -71,30 +71,29 @@
             textBoxPostTitle.TabIndex = 3;
             textBoxPostTitle.Text = "SomeTitle";
             // 
-            // textBoxPostText
+            // richTextBoxPostText
             // 
-            textBoxPostText.Font = new Font("Microsoft Sans Serif", 10F);
-            textBoxPostText.Location = new Point(147, 108);
-            textBoxPostText.Multiline = true;
-            textBoxPostText.Name = "textBoxPostText";
-            textBoxPostText.Size = new Size(592, 30);
-            textBoxPostText.TabIndex = 4;
-            textBoxPostText.Text = "SomeText";
+            richTextBoxPostText.Font = new Font("Microsoft Sans Serif", 10F);
+            richTextBoxPostText.Location = new Point(147, 108);
+            richTextBoxPostText.Name = "richTextBoxPostText";
+            richTextBoxPostText.Size = new Size(592, 286);
+            richTextBoxPostText.TabIndex = 4;
+            richTextBoxPostText.Text = "";
             // 
-            // PostForm
+            // WritePostForm
             // 
             AutoScaleDimensions = new SizeF(13F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaption;
             ClientSize = new Size(751, 491);
-            Controls.Add(textBoxPostText);
+            Controls.Add(richTextBoxPostText);
             Controls.Add(textBoxPostTitle);
             Controls.Add(btnEndPost);
             Controls.Add(lblPostText);
             Controls.Add(lblPostTitle);
             Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
-            Margin = new Padding(4, 4, 4, 4);
-            Name = "PostForm";
+            Margin = new Padding(4);
+            Name = "WritePostForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Post Creation";
             ResumeLayout(false);
@@ -107,6 +106,6 @@
         private Label lblPostText;
         private Button btnEndPost;
         private TextBox textBoxPostTitle;
-        private TextBox textBoxPostText;
+        private RichTextBox richTextBoxPostText;
     }
 }

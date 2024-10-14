@@ -36,6 +36,10 @@
             btnBeginPost = new Button();
             btnDeletePosts = new Button();
             btnFollow = new Button();
+            richTextBoxInterests = new RichTextBox();
+            lblInterests = new Label();
+            lblAddress = new Label();
+            richTextBoxAddress = new RichTextBox();
             ((System.ComponentModel.ISupportInitialize)dgvUserPosts).BeginInit();
             SuspendLayout();
             // 
@@ -121,12 +125,54 @@
             btnFollow.UseVisualStyleBackColor = true;
             btnFollow.Click += btnFollow_Click;
             // 
+            // richTextBoxInterests
+            // 
+            richTextBoxInterests.Location = new Point(204, 361);
+            richTextBoxInterests.Name = "richTextBoxInterests";
+            richTextBoxInterests.ReadOnly = true;
+            richTextBoxInterests.Size = new Size(179, 126);
+            richTextBoxInterests.TabIndex = 10;
+            richTextBoxInterests.Text = "";
+            // 
+            // lblInterests
+            // 
+            lblInterests.AutoSize = true;
+            lblInterests.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Bold);
+            lblInterests.Location = new Point(204, 338);
+            lblInterests.Name = "lblInterests";
+            lblInterests.Size = new Size(83, 20);
+            lblInterests.TabIndex = 11;
+            lblInterests.Text = "Interests";
+            // 
+            // lblAddress
+            // 
+            lblAddress.AutoSize = true;
+            lblAddress.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Bold);
+            lblAddress.Location = new Point(422, 340);
+            lblAddress.Name = "lblAddress";
+            lblAddress.Size = new Size(78, 20);
+            lblAddress.TabIndex = 12;
+            lblAddress.Text = "Address";
+            // 
+            // richTextBoxAddress
+            // 
+            richTextBoxAddress.Location = new Point(422, 363);
+            richTextBoxAddress.Name = "richTextBoxAddress";
+            richTextBoxAddress.ReadOnly = true;
+            richTextBoxAddress.Size = new Size(179, 126);
+            richTextBoxAddress.TabIndex = 13;
+            richTextBoxAddress.Text = "";
+            // 
             // ProfileForm
             // 
             AutoScaleDimensions = new SizeF(10F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaption;
             ClientSize = new Size(688, 499);
+            Controls.Add(richTextBoxAddress);
+            Controls.Add(lblAddress);
+            Controls.Add(lblInterests);
+            Controls.Add(richTextBoxInterests);
             Controls.Add(btnFollow);
             Controls.Add(btnDeletePosts);
             Controls.Add(btnBeginPost);
@@ -155,5 +201,9 @@
         private Button btnBeginPost;
         private Button btnDeletePosts;
         private Button btnFollow;
+        private RichTextBox richTextBoxInterests;
+        private Label lblInterests;
+        private Label lblAddress;
+        private RichTextBox richTextBoxAddress;
     }
 }

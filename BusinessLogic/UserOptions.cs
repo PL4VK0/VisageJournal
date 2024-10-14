@@ -35,7 +35,10 @@ namespace BusinessLogic
             userDAL.Add(user);
         }
 
-
+        public User FindUser(string userID)
+        {
+            return userDAL.GetByID(userID);
+        }
         public void SignIn(string emailOrUserName, string password)
         {
             //checking email
@@ -54,45 +57,46 @@ namespace BusinessLogic
         }
         public void Follow(string idThatFollows, string idToFollow)
         {
-            User userThatFollows = userCollection.Find(u => u.UserID == idThatFollows).FirstOrDefault();
-            if (userThatFollows == null)
-                throw new Exception("The unexisting user is trying to follow someone");
-
-            if (idThatFollows == idToFollow)
-                throw new Exception("You can't follow yourself! (but you can follow your dreams...)");
-
-            if (userThatFollows.FollowingIDs.Contains(idToFollow))
-                throw new Exception("This user is already followed by you!");
-
-            User userToFollow = userCollection.Find(u => u.UserID == idToFollow).FirstOrDefault();
-            if (userToFollow == null)
-                throw new Exception("You can't follow an unexisting user!");
+            var filterThatFollows = Builders<User>.Filter.Eq(u=>u.UserID, idThatFollows);
+            var filterToFollow = Builders<User>.Filter.Eq(u => u.UserID, idToFollow);
+            User userThatFollows = userCollection.Find(filterThatFollows).FirstOrDefault();
+            User userToFollow = userCollection.Find(filterToFollow).FirstOrDefault();
 
             userThatFollows.FollowingIDs.Add(idToFollow);
             userToFollow.FollowerIDs.Add(idThatFollows);
+
+
+            user = userThatFollows;
+
 
             var updateThatFollows = Builders<User>.Update
                 .Set(u => u.FollowingIDs, userThatFollows.FollowingIDs);
             var updateToFollow = Builders<User>.Update
                 .Set(u => u.FollowerIDs, userToFollow.FollowerIDs);
-            userCollection.UpdateOne(userThatFollows.UserID, updateThatFollows);
-            userCollection.UpdateOne(userToFollow.UserID, updateToFollow);
+            userCollection.UpdateOne(filterThatFollows, updateThatFollows);
+            userCollection.UpdateOne(filterToFollow, updateToFollow);
         }
         public void UnFollow(string idThatUnFollows, string idToUnFollow)
         {
-            User userThatUnFollows = userCollection.Find(u => u.UserID == idThatUnFollows).FirstOrDefault();
-            User userToUnFollow = userCollection.Find(u => u.UserID == idToUnFollow).FirstOrDefault();
+            var filterThatUnFollows = Builders<User>.Filter.Eq(u => u.UserID, idThatUnFollows);
+            var filterToUnFollow = Builders<User>.Filter.Eq(u => u.UserID, idToUnFollow);
+            User userThatUnFollows = userCollection.Find(filterThatUnFollows).FirstOrDefault();
+            User userToUnFollow = userCollection.Find(filterToUnFollow).FirstOrDefault();
 
             userThatUnFollows.FollowingIDs.Remove(idToUnFollow);
             userToUnFollow.FollowerIDs.Remove(idThatUnFollows);
+
+
+            user = userThatUnFollows;
+
 
             var updateThatUnFollows = Builders<User>.Update
                 .Set(u => u.FollowingIDs, userThatUnFollows.FollowingIDs);
             var updateToUnFollow = Builders<User>.Update
                 .Set(u => u.FollowerIDs, userToUnFollow.FollowerIDs);
 
-            userCollection.UpdateOne(userThatUnFollows.UserID, updateThatUnFollows);
-            userCollection.UpdateOne(userToUnFollow.UserID, updateToUnFollow);
+            userCollection.UpdateOne(filterThatUnFollows, updateThatUnFollows);
+            userCollection.UpdateOne(filterToUnFollow, updateToUnFollow);
         }
 
 
@@ -255,6 +259,55 @@ namespace BusinessLogic
             //unalive account
             var filter = Builders<User>.Filter.Eq(u => u.UserID, user.UserID);
             userCollection.DeleteOne(filter);
+        }
+        public List<Comment> GetAllCommentsFromThisPost(Post post)
+        {
+            var filter = Builders<Comment>.Filter.Eq(c=>c.PostID,post.PostID);
+            return commentCollection.Find(filter).ToList();
+        }
+        public void NewCommentFromThisUser(Comment comment)
+        {
+            commentDAL.Add(comment);
+            //commentCollection.InsertOne(comment);
+        }
+        public void UpVoteComment(Comment comment)
+        {
+            var filter = Builders<Comment>.Filter.Eq(c => c.CommentID, comment.CommentID);
+            comment.UpVotes.Add(user.UserID);
+            var updateComment = Builders<Comment>.Update
+                .Set(c => c.UpVotes, comment.UpVotes);
+            commentCollection.UpdateOne(filter, updateComment);
+        }
+        public void DownVoteComment(Comment comment)
+        {
+            var filter = Builders<Comment>.Filter.Eq(c => c.CommentID, comment.CommentID);
+            comment.DownVotes.Add(user.UserID);
+            var updateComment = Builders<Comment>.Update
+                .Set(c => c.DownVotes, comment.DownVotes);
+            commentCollection.UpdateOne(filter, updateComment);
+        }
+        public List<Post> GetAllFriendAndMinePosts()
+        {
+            List<Post> posts = new List<Post>();
+            var filter = Builders<User>.Filter.Where(u=>u.FollowerIDs.Contains(user.UserID));
+            var followedUsers = userCollection.Find(filter).ToList();
+            foreach (var followedUser in followedUsers)
+            {
+                var postFilter = Builders<Post>.Filter.Eq(p => p.PosterUserName, followedUser.UserName);
+                var thisUserPosts = postCollection.Find(postFilter).ToList();
+                if(thisUserPosts != null)
+                    posts.AddRange(thisUserPosts);
+            }
+            List<Post> myPosts = GetAllPostsFromThisUser(user);
+            if(myPosts!=null) 
+                posts.AddRange(myPosts);
+            return posts;
+        }
+        public User FindByUserName(string userName)
+        {
+            var userFilter = Builders<User>.Filter.Eq(u => u.UserName, userName);
+            var foundUser = userCollection.Find(userFilter).FirstOrDefault();
+            return foundUser;
         }
     }
 }

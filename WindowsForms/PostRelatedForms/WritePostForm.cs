@@ -21,7 +21,7 @@ namespace WindowsForms
         private void btnEndPost_Click(object sender, EventArgs e)
         {
             string postTitle = textBoxPostTitle.Text;
-            string postText = textBoxPostText.Text;
+            string postText = richTextBoxPostText.Text;
             try
             {
                 VJ.userOptions.NewPostFromThisUser(postTitle,postText);

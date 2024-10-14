@@ -37,6 +37,13 @@ namespace WindowsForms
             }
             userToRegister.Interests = interestArray;
 
+            BsonDocument address = new BsonDocument
+            {
+                {"city",txtBoxCity.Text },
+                {"country",txtBoxCountry.Text},
+                {"planet",txtBoxPlanet.Text }
+            };
+            userToRegister.Address = address;
             try 
             {
                 VJ.userOptions.SignUp(userToRegister);

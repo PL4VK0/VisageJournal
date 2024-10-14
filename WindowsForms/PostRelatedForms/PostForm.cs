@@ -1,13 +1,5 @@
 ﻿using DTO;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using WindowsForms.CommentRelatedForms;
 
 namespace WindowsForms
 {
@@ -43,22 +35,43 @@ namespace WindowsForms
         }
         private void Refresh()
         {
+            dgvPostComments.DataSource = null;
             if (post.UpVotes.Contains(VJ.userOptions.GetUser().UserID))
-                btnUpVote.BackColor = Color.Green;
+                btnUpVote.BackColor = Color.LightGreen;
             else
                 btnUpVote.BackColor = Color.White;
 
 
             if (post.DownVotes.Contains(VJ.userOptions.GetUser().UserID))
-                btnDownVote.BackColor = Color.Red;
+                btnDownVote.BackColor = Color.OrangeRed;
             else
                 btnDownVote.BackColor = Color.White;
             lblCountRating.Text = Convert.ToString(post.UpVotes.Count - post.DownVotes.Count);
+
+
+            List<Comment> postComments = VJ.userOptions.GetAllCommentsFromThisPost(post).OrderByDescending(c=>c.Date).ToList();
+            dgvPostComments.DataSource = new BindingSource { DataSource = postComments };
+            dgvPostComments.Columns["CommentID"].Visible = false;
+            dgvPostComments.Columns["Date"].Visible = false;
+            dgvPostComments.Columns["PostID"].Visible = false;
+            dgvPostComments.Columns["PosterUserName"].Visible = false;
+            dgvPostComments.Columns["CommentatorUserName"].Visible = true;
+            dgvPostComments.Columns["CommentatorUserName"].HeaderText = "User";
+            dgvPostComments.Columns["CommentText"].HeaderText = "Text";
+            dgvPostComments.Columns["UpVotes"].Visible = false;
+            dgvPostComments.Columns["DownVotes"].Visible = false;
+            dgvPostComments.Columns["CommentatorUserName"].Name = "User";
+            if (dgvPostComments.Rows.Count > 0)
+                lblPostComments.Text = "Comments";
         }
 
         private void dgvPostComments_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            if (e.RowIndex < 0)
+                return;
+            Comment comment = (Comment)dgvPostComments.Rows[e.RowIndex].DataBoundItem;
+            CommentForm commentForm = new CommentForm(comment);
+            commentForm.ShowDialog();
         }
 
         private void btnDownVote_Click(object sender, EventArgs e)
@@ -72,6 +85,13 @@ namespace WindowsForms
             if (post.UpVotes.Contains(VJ.userOptions.GetUser().UserID))
                 VJ.userOptions.RemovePostUpVote(post);
             VJ.userOptions.DownVotePost(post);
+            Refresh();
+        }
+
+        private void btnBeginAddComment_Click(object sender, EventArgs e)
+        {
+            WriteCommentForm addCommentForm = new WriteCommentForm(post);
+            addCommentForm.ShowDialog();
             Refresh();
         }
     }

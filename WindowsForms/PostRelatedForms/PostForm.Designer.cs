@@ -36,6 +36,8 @@
             lblRating = new Label();
             lblCountRating = new Label();
             dgvPostComments = new DataGridView();
+            lblPostComments = new Label();
+            btnBeginAddComment = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvPostComments).BeginInit();
             SuspendLayout();
             // 
@@ -108,20 +110,45 @@
             // 
             // dgvPostComments
             // 
+            dgvPostComments.AllowUserToAddRows = false;
+            dgvPostComments.AllowUserToDeleteRows = false;
+            dgvPostComments.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dgvPostComments.BackgroundColor = SystemColors.Control;
             dgvPostComments.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvPostComments.Location = new Point(521, 150);
+            dgvPostComments.Location = new Point(414, 150);
             dgvPostComments.Name = "dgvPostComments";
             dgvPostComments.RowHeadersWidth = 51;
-            dgvPostComments.Size = new Size(385, 284);
+            dgvPostComments.Size = new Size(492, 284);
             dgvPostComments.TabIndex = 7;
             dgvPostComments.CellContentDoubleClick += dgvPostComments_CellContentDoubleClick;
+            // 
+            // lblPostComments
+            // 
+            lblPostComments.AutoSize = true;
+            lblPostComments.Location = new Point(414, 109);
+            lblPostComments.Name = "lblPostComments";
+            lblPostComments.Size = new Size(314, 23);
+            lblPostComments.TabIndex = 8;
+            lblPostComments.Text = "there are no comments (write one)";
+            // 
+            // btnBeginAddComment
+            // 
+            btnBeginAddComment.Location = new Point(734, 440);
+            btnBeginAddComment.Name = "btnBeginAddComment";
+            btnBeginAddComment.Size = new Size(172, 29);
+            btnBeginAddComment.TabIndex = 9;
+            btnBeginAddComment.Text = "Write a comment";
+            btnBeginAddComment.UseVisualStyleBackColor = true;
+            btnBeginAddComment.Click += btnBeginAddComment_Click;
             // 
             // PostForm
             // 
             AutoScaleDimensions = new SizeF(11F, 23F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1100, 518);
+            BackColor = SystemColors.ActiveCaption;
+            ClientSize = new Size(962, 526);
+            Controls.Add(btnBeginAddComment);
+            Controls.Add(lblPostComments);
             Controls.Add(dgvPostComments);
             Controls.Add(lblCountRating);
             Controls.Add(lblRating);
@@ -133,6 +160,7 @@
             Font = new Font("Arial", 12F);
             Margin = new Padding(4, 3, 4, 3);
             Name = "PostForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "PostForm";
             Load += PostForm_Load;
             ((System.ComponentModel.ISupportInitialize)dgvPostComments).EndInit();
@@ -150,5 +178,7 @@
         private Label lblRating;
         private Label lblCountRating;
         private DataGridView dgvPostComments;
+        private Label lblPostComments;
+        private Button btnBeginAddComment;
     }
 }
