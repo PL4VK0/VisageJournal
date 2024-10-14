@@ -64,8 +64,6 @@ namespace DAL.Beton
                 Set(u => u.Email, user.Email).
                 Set(u => u.Password, user.Password).
                 Set(u => u.Address, user.Address).
-                Set(u => u.CommentIDs, user.CommentIDs).
-                Set(u => u.PostIDs, user.PostIDs).
                 Set(u => u.Interests, user.Interests).
                 Set(u => u.FollowerIDs, user.FollowerIDs).
                 Set(u => u.FollowingIDs, user.FollowingIDs);

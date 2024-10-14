@@ -40,8 +40,8 @@ namespace DAL.Beton
         {
             var update = Builders<Comment>.Update
                 .Set(c=>c.CommentID,comment.CommentID)
-                .Set(c => c.PostID, comment.PostID)
-                .Set(c => c.CommentatorID, comment.CommentatorID)
+                .Set(c => c.PosterUserName, comment.PosterUserName)
+                .Set(c => c.CommentatorUserName, comment.CommentatorUserName)
                 .Set(c => c.CommentText, comment.CommentText)
                 .Set(c => c.UpVotes, comment.UpVotes)
                 .Set(c => c.DownVotes, comment.DownVotes);

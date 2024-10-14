@@ -16,7 +16,11 @@ namespace WindowsForms
             {
                 btnBeginPost.Hide();
                 btnDeleteAccount.Hide();
+                btnDeletePosts.Hide();
+                if (user.FollowingIDs.Contains(VJ.userOptions.GetUser().UserID))
+                    btnFollow.Text = "UnFollow";
             }
+            btnFollow.Hide();
             lblProfileName.Text = VJ.userOptions.GetUser().UserName;
             lblUserPosts.Text = VJ.userOptions.GetUser().UserName + "'s Posts ";
             RefreshGrid();
@@ -31,7 +35,7 @@ namespace WindowsForms
         private void RefreshGrid()
         {
             dgvUserPosts.DataSource = null;
-            dgvUserPosts.DataSource = VJ.userOptions.GetAllPostsFromThisUser(user.UserID).OrderByDescending(p => p.Date).ToList();
+            dgvUserPosts.DataSource = new BindingSource { DataSource = VJ.userOptions.GetAllPostsFromThisUser(user).OrderByDescending(p => p.Date).ToList() };
 
 
             if (dgvUserPosts.Rows.Count == 0 && user.UserID == VJ.userOptions.GetUser().UserID)
@@ -41,9 +45,9 @@ namespace WindowsForms
 
 
             dgvUserPosts.Columns["PostID"].Visible = false;
-            dgvUserPosts.Columns["PosterID"].Visible = false;
+            dgvUserPosts.Columns["PosterUserName"].Visible = false;
             dgvUserPosts.Columns["PostText"].Visible = false;
-            dgvUserPosts.Columns["CommentIDs"].Visible = false;
+            //dgvUserPosts.Columns["CommentIDs"].Visible = false;
             dgvUserPosts.Columns["UpVotes"].Visible = false;
             dgvUserPosts.Columns["DownVotes"].Visible = false;
         }
@@ -52,6 +56,34 @@ namespace WindowsForms
         {
             UnRegisterForm unRegisterForm = new UnRegisterForm();
             unRegisterForm.ShowDialog();
+        }
+
+        private void btnDeletePosts_Click(object sender, EventArgs e)
+        {
+            for (int i = dgvUserPosts.SelectedRows.Count - 1; i >= 0d; i--)
+            {
+                Post selectedPost = dgvUserPosts.SelectedRows[i].DataBoundItem as Post;
+                VJ.userOptions.RemovePost(selectedPost);
+            }
+            RefreshGrid();
+            //Post item = dgvUserPosts.SelectedRows[0].DataBoundItem as Post;
+        }
+
+        private void btnFollow_Click(object sender, EventArgs e)
+        {
+            if (!user.FollowingIDs.Contains(VJ.userOptions.GetUser().UserID))
+                VJ.userOptions.Follow(VJ.userOptions.GetUser().UserID, user.UserID);
+            else
+                VJ.userOptions.UnFollow(VJ.userOptions.GetUser().UserID, user.UserID);
+        }
+
+        private void dgvUserPosts_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.RowIndex<0) 
+                return;
+            Post post = (Post)dgvUserPosts.Rows[e.RowIndex].DataBoundItem;
+            PostForm postForm = new PostForm(post);
+            postForm.ShowDialog();
         }
     }
 }

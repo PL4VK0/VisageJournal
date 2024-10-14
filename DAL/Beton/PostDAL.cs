@@ -43,10 +43,10 @@ namespace DAL.Beton
         {
             var update = Builders<Post>.Update
                 .Set(p => p.PostID, post.PostID)
-                .Set(p => p.PosterID, post.PosterID)
+                .Set(p => p.PosterUserName, post.PosterUserName)
                 .Set(p => p.PostTitle, post.PostTitle)
                 .Set(p => p.PostText, post.PostText)
-                .Set(p => p.CommentIDs, post.CommentIDs)
+                //.Set(p => p.CommentIDs, post.CommentIDs)
                 .Set(p => p.UpVotes, post.UpVotes)
                 .Set(p => p.DownVotes, post.DownVotes);
 

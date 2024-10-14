@@ -35,6 +35,7 @@
             lblUserPosts = new Label();
             btnBeginPost = new Button();
             btnDeletePosts = new Button();
+            btnFollow = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvUserPosts).BeginInit();
             SuspendLayout();
             // 
@@ -58,6 +59,7 @@
             dgvUserPosts.RowHeadersWidth = 51;
             dgvUserPosts.Size = new Size(664, 188);
             dgvUserPosts.TabIndex = 1;
+            dgvUserPosts.CellContentDoubleClick += dgvUserPosts_CellContentDoubleClick;
             // 
             // lblProfileName
             // 
@@ -107,6 +109,17 @@
             btnDeletePosts.TabIndex = 8;
             btnDeletePosts.Text = "DeleteSelectedPosts";
             btnDeletePosts.UseVisualStyleBackColor = true;
+            btnDeletePosts.Click += btnDeletePosts_Click;
+            // 
+            // btnFollow
+            // 
+            btnFollow.Location = new Point(13, 324);
+            btnFollow.Name = "btnFollow";
+            btnFollow.Size = new Size(94, 34);
+            btnFollow.TabIndex = 9;
+            btnFollow.Text = "Follow";
+            btnFollow.UseVisualStyleBackColor = true;
+            btnFollow.Click += btnFollow_Click;
             // 
             // ProfileForm
             // 
@@ -114,6 +127,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaption;
             ClientSize = new Size(688, 499);
+            Controls.Add(btnFollow);
             Controls.Add(btnDeletePosts);
             Controls.Add(btnBeginPost);
             Controls.Add(lblUserPosts);
@@ -140,5 +154,6 @@
         private Label lblUserPosts;
         private Button btnBeginPost;
         private Button btnDeletePosts;
+        private Button btnFollow;
     }
 }

@@ -1,5 +1,6 @@
 ﻿using DAL.Beton;
 using DTO;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using System.Xml.Linq;
 
@@ -51,9 +52,6 @@ namespace BusinessLogic
                 throw new Exception("WRONG PASSWORD!!!");
             user = userToSignIn;
         }
-
-
-
         public void Follow(string idThatFollows, string idToFollow)
         {
             User userThatFollows = userCollection.Find(u => u.UserID == idThatFollows).FirstOrDefault();
@@ -98,65 +96,95 @@ namespace BusinessLogic
         }
 
 
-        public List<Post> GetAllPostsFromThisUser(string userID)
+        public List<Post> GetAllPostsFromThisUser(User user)
         {
-            return postCollection.Find(p => p.PosterID == userID).ToList();
+            return postCollection.Find(p => p.PosterUserName == user.UserName).ToList();
         }
 
         public void NewPostFromThisUser(string postTitle, string postText)
         {
             Post newPost = new Post();
-            newPost.PosterID = user.UserID;
+            newPost.PosterUserName = user.UserName;
             newPost.PostTitle = postTitle;
             newPost.PostText = postText;
             postDAL.Add(newPost);
+
+            //var filter = Builders<Post>.Filter.Empty;
+            //var sort = Builders<Post>.Sort.Descending("date");
+            //var lastPost = postCollection.Find(filter).Sort(sort).FirstOrDefault();
+
+            //string lastPostId = lastPost.PostID;
+
+            //user.PostIDs.Add(lastPostId);
+
+            //var update = Builders<Post>.Update.Set("postIDs", user.PostIDs);
+            //postCollection.UpdateOne(user.UserID,update);
         }
         public void RemoveCommentUpVote(Comment comment)
         {
             comment.UpVotes.Remove(user.UserID);
 
 
+            var filter = Builders<Comment>.Filter.Eq(c=>c.CommentID, comment.CommentID);
             var updateComment = Builders<Comment>.Update
                 .Set(c => c.UpVotes, comment.UpVotes);
-            commentCollection.UpdateOne(comment.CommentID, updateComment);
+            commentCollection.UpdateOne(filter, updateComment);
         }
         public void RemoveCommentDownVote(Comment comment)
         {
             comment.DownVotes.Remove(user.UserID);
-
+            var filter = Builders<Comment>.Filter.Eq(c => c.CommentID, comment.CommentID);
             var updateComment = Builders<Comment>.Update.Set(c => c.DownVotes, comment.DownVotes);
 
-            commentCollection.UpdateOne(comment.CommentID, updateComment);
+            commentCollection.UpdateOne(filter, updateComment);
         }
-        public void RemoveCommentInCurrentUser(Comment comment)
+        public void RemoveComment(Comment comment)
         {
-            commentCollection.DeleteOne(comment.CommentID);
+            var filter = Builders<Comment>.Filter.Eq(c=>c.CommentID, comment.CommentID);
+            commentCollection.DeleteOne(filter);
         }
-        public void RemoveCommentInPost(Post post, Comment comment)
+        public void UpVotePost(Post post)
         {
-            post.CommentIDs.Remove(comment.CommentID);
-
-            var updatePost = Builders<Post>.Update.Set(p => p.CommentIDs, post.CommentIDs);
-
-            postCollection.UpdateOne(post.PostID, updatePost);
+            var filter = Builders<Post>.Filter.Eq(p => p.PostID, post.PostID);
+            post.UpVotes.Add(user.UserID);
+            var updatePost = Builders<Post>.Update
+                .Set(p => p.UpVotes, post.UpVotes);
+            postCollection.UpdateOne(filter, updatePost);
+        }
+        public void DownVotePost(Post post)
+        {
+            var filter = Builders<Post>.Filter.Eq(p => p.PostID, post.PostID);
+            post.DownVotes.Add(user.UserID);
+            var updatePost = Builders<Post>.Update
+                .Set(p => p.DownVotes, post.DownVotes);
+            postCollection.UpdateOne(filter, updatePost);
         }
         public void RemovePostUpVote(Post post)
         {
+            var filter = Builders<Post>.Filter.Eq(p=>p.PostID, post.PostID);
             post.UpVotes.Remove(user.UserID);
             var updatePost = Builders<Post>.Update
                 .Set(p => p.UpVotes, post.UpVotes);
-            postCollection.UpdateOne(post.PostID, updatePost);
+            postCollection.UpdateOne(filter, updatePost);
         }
         public void RemovePostDownVote(Post post)
         {
+            var filter = Builders<Post>.Filter.Eq(p => p.PostID, post.PostID);
             post.DownVotes.Remove(user.UserID);
             var updatePost = Builders<Post>.Update
                 .Set(p => p.DownVotes, post.DownVotes);
-            postCollection.UpdateOne(post.PostID, updatePost);
+            postCollection.UpdateOne(filter, updatePost);
         }
         public void RemovePost(Post post)
         {
-            postCollection.DeleteOne(post.PostID);
+            var commentFilter = Builders<Comment>.Filter.Eq(c=>c.PosterUserName, post.PosterUserName);
+            commentCollection.DeleteMany(commentFilter);
+
+
+            var filter = Builders<Post>.Filter.Eq(post => post.PostID,post.PostID);
+            postCollection.DeleteOne(filter);
+            //postCollection.DeleteOne(post.PostID);
+            //postDAL.DeleteByID(post.PostID);
         }
         public void SignDown()
         {
@@ -175,10 +203,8 @@ namespace BusinessLogic
 
 
             //deleting all upvotes and downvotes
-            List<Comment> commentsToDeleteUpVotesIn = commentCollection.Find(u=>u.UpVotes.Contains(user.UserID)).ToList();
+            List<Comment> commentsToDeleteUpVotesIn = commentCollection.Find(u => u.UpVotes.Contains(user.UserID)).ToList();
             List<Comment> commentsToDeleteDownVotesIn = commentCollection.Find(u => u.DownVotes.Contains(user.UserID)).ToList();
-
-
 
             foreach (var comment in commentsToDeleteUpVotesIn)
                 RemoveCommentUpVote(comment);
@@ -190,17 +216,23 @@ namespace BusinessLogic
 
             //deleting all comments 
 
-            List<Comment> commentsToDelete = commentCollection.Find(c=>c.CommentatorID==user.UserID).ToList();
-            foreach (var comment in commentsToDelete)
-                RemoveCommentInCurrentUser(comment);
+            var commentFilter = Builders<Comment>.Filter.Eq(c=>c.CommentatorUserName,user.UserName);
+            commentCollection.DeleteMany(commentFilter);
+            //List<Comment> commentsToDelete = commentCollection.Find(c=>c.CommentatorID==user.UserID).ToList();
+            //foreach (var comment in commentsToDelete)
+            //    RemoveComment(comment);
+
+
 
             //deleteing all other users comments from this user's posts...
-            List<Post> userPosts = postCollection.Find(p=>p.PosterID==user.UserID).ToList();
-            foreach(var post in userPosts)
+            List<Post> userPosts = postCollection.Find(p => p.PosterUserName == user.UserName).ToList();
+            foreach (var post in userPosts)
             {
-                List<Comment> otherUserComments = commentCollection.Find(c=>c.PostID==post.PostID).ToList();
-                foreach (var comment in otherUserComments)
-                    RemoveCommentInPost(post,comment);
+                var otherUsersCommentFilter = Builders<Comment>.Filter.Eq(c => c.PosterUserName, post.PosterUserName);
+                commentCollection.DeleteMany(otherUsersCommentFilter);
+                //List<Comment> otherUserComments = commentCollection.Find(c => c.PostID == post.PostID).ToList();
+                //foreach (var comment in otherUserComments)
+                //    RemoveComment(comment);
             }
 
             //deleting all post upvotes/downvotes from this user
@@ -221,7 +253,8 @@ namespace BusinessLogic
                 RemovePost(userPost);
 
             //unalive account
-            userCollection.DeleteOne(user.UserID);
+            var filter = Builders<User>.Filter.Eq(u => u.UserID, user.UserID);
+            userCollection.DeleteOne(filter);
         }
     }
 }

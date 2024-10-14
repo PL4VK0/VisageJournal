@@ -23,10 +23,6 @@ namespace DTO
         public BsonArray FollowerIDs { get; set; } = new BsonArray();
         [BsonElement("followingIDs")]
         public BsonArray FollowingIDs { get; set; } = new BsonArray();
-        [BsonElement("postIDs")]
-        public BsonArray PostIDs { get;set; } = new BsonArray();
-        [BsonElement("commentIDs")]
-        public BsonArray CommentIDs { get; set; } = new BsonArray();
         [BsonElement("email")]
         public string Email { get; set; }
         [BsonElement("password")]

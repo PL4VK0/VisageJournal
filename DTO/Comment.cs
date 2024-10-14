@@ -9,10 +9,10 @@ namespace DTO
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string CommentID { get; set; }
-        [BsonElement("postID")]
-        public string PostID { get; set; }
-        [BsonElement("commentatorID")]
-        public string CommentatorID { get; set; }
+        [BsonElement("posterUserName")]
+        public string PosterUserName { get; set; }
+        [BsonElement("commentatorUserName")]
+        public string CommentatorUserName { get; set; }
         [BsonElement("commentText")]
         public string CommentText { get; set; }
         [BsonElement("upVotes")]
