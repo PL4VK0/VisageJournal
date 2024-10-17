@@ -1,0 +1,341 @@
+[{
+  "_id": {
+    "$oid": "670d65f7a0404e42cb4dd6e8"
+  },
+  "firstName": "Yaroslav",
+  "lastName": "Saveliuk",
+  "userName": "PL4VK0",
+  "interests": [
+    "swimming",
+    "cycling",
+    "hacking",
+    "jogging"
+  ],
+  "address": {
+    "city": "Khmelnytskyi",
+    "country": "Ukraine",
+    "planet": "Neptune"
+  },
+  "followerIDs": [
+    "670d6741df7282fc1410a926",
+    "670d6a788551fc0f1b77cd68",
+    "670d67fd995e297d00b671a6",
+    "670d6a288551fc0f1b77cd67",
+    "670d69378551fc0f1b77cd62",
+    "670fac8f4c79300d0a64f019",
+    "6710fb05185b41d0b7bd0865"
+  ],
+  "followingIDs": [
+    "670d69c18551fc0f1b77cd65",
+    "670d69818551fc0f1b77cd64",
+    "670d6a788551fc0f1b77cd68",
+    "670d69f68551fc0f1b77cd66",
+    "670d67fd995e297d00b671a6",
+    "670d68c78551fc0f1b77cd60",
+    "670d6a288551fc0f1b77cd67"
+  ],
+  "email": "dontcare@gmail.com",
+  "password": "wonttell"
+},
+{
+  "_id": {
+    "$oid": "670d6741df7282fc1410a926"
+  },
+  "firstName": "Iryna",
+  "lastName": "Saveliuk",
+  "userName": "irynasav",
+  "interests": [
+    "caring"
+  ],
+  "address": {},
+  "followerIDs": [
+    "670d67fd995e297d00b671a6"
+  ],
+  "followingIDs": [
+    "670d65f7a0404e42cb4dd6e8",
+    "670d69c18551fc0f1b77cd65"
+  ],
+  "email": "someemail@gmail.com",
+  "password": "psswrd"
+},
+{
+  "_id": {
+    "$oid": "670d67fd995e297d00b671a6"
+  },
+  "firstName": "Vergil",
+  "lastName": "Vergil",
+  "userName": "Vergil",
+  "interests": [
+    "slashing"
+  ],
+  "address": {},
+  "followerIDs": [
+    "670d65f7a0404e42cb4dd6e8",
+    "670d68c78551fc0f1b77cd60",
+    "670d6a288551fc0f1b77cd67",
+    "670fac8f4c79300d0a64f019"
+  ],
+  "followingIDs": [
+    "670d6741df7282fc1410a926",
+    "670d68c78551fc0f1b77cd60",
+    "670d65f7a0404e42cb4dd6e8"
+  ],
+  "email": "vergil@vergil.com",
+  "password": "Vergil"
+},
+{
+  "_id": {
+    "$oid": "670d68c78551fc0f1b77cd60"
+  },
+  "firstName": "Dante",
+  "lastName": "Dante",
+  "userName": "Dante",
+  "interests": [
+    "slashing"
+  ],
+  "address": {},
+  "followerIDs": [
+    "670d65f7a0404e42cb4dd6e8",
+    "670d67fd995e297d00b671a6",
+    "670d6a788551fc0f1b77cd68",
+    "670d69f68551fc0f1b77cd66",
+    "670fac8f4c79300d0a64f019"
+  ],
+  "followingIDs": [
+    "670d67fd995e297d00b671a6"
+  ],
+  "email": "dante@dante.com",
+  "password": "Dante"
+},
+{
+  "_id": {
+    "$oid": "670d69098551fc0f1b77cd61"
+  },
+  "firstName": "Vlad",
+  "lastName": "Timosh",
+  "userName": "timmega",
+  "interests": [
+    "gaming"
+  ],
+  "address": {},
+  "followerIDs": [
+    "670d6a788551fc0f1b77cd68",
+    "670d695a8551fc0f1b77cd63"
+  ],
+  "followingIDs": [],
+  "email": "vladtimosh@gmail.com",
+  "password": "timmega"
+},
+{
+  "_id": {
+    "$oid": "670d69378551fc0f1b77cd62"
+  },
+  "firstName": "Rodion",
+  "lastName": "Plotsidym",
+  "userName": "qv1nti",
+  "interests": [
+    "gaming"
+  ],
+  "address": {},
+  "followerIDs": [
+    "670d6a788551fc0f1b77cd68",
+    "670d695a8551fc0f1b77cd63"
+  ],
+  "followingIDs": [
+    "670d65f7a0404e42cb4dd6e8"
+  ],
+  "email": "rodion@gmail.com",
+  "password": "qv1nti"
+},
+{
+  "_id": {
+    "$oid": "670d695a8551fc0f1b77cd63"
+  },
+  "firstName": "Dima",
+  "lastName": "Osadchuk",
+  "userName": "styylzed",
+  "interests": [
+    "gaming"
+  ],
+  "address": {},
+  "followerIDs": [
+    "670d6a788551fc0f1b77cd68"
+  ],
+  "followingIDs": [
+    "670d69098551fc0f1b77cd61",
+    "670d69378551fc0f1b77cd62"
+  ],
+  "email": "dima@gmail.com",
+  "password": "styylzed"
+},
+{
+  "_id": {
+    "$oid": "670d69818551fc0f1b77cd64"
+  },
+  "firstName": "Andriy",
+  "lastName": "Kovalenko",
+  "userName": "butterfly",
+  "interests": [
+    "swimming"
+  ],
+  "address": {},
+  "followerIDs": [
+    "670d6a788551fc0f1b77cd68",
+    "670d65f7a0404e42cb4dd6e8"
+  ],
+  "followingIDs": [
+    "670d69c18551fc0f1b77cd65",
+    "670d69f68551fc0f1b77cd66",
+    "670d6a788551fc0f1b77cd68"
+  ],
+  "email": "koval@gmail.com",
+  "password": "butterfly"
+},
+{
+  "_id": {
+    "$oid": "670d69c18551fc0f1b77cd65"
+  },
+  "firstName": "Anton",
+  "lastName": "Kostynskyi",
+  "userName": "toha",
+  "interests": [
+    "swimming",
+    "singing"
+  ],
+  "address": {},
+  "followerIDs": [
+    "670d6a788551fc0f1b77cd68",
+    "670d65f7a0404e42cb4dd6e8",
+    "670d6741df7282fc1410a926",
+    "670d69f68551fc0f1b77cd66",
+    "670d69818551fc0f1b77cd64"
+  ],
+  "followingIDs": [],
+  "email": "toha@gmail.com",
+  "password": "toha"
+},
+{
+  "_id": {
+    "$oid": "670d69f68551fc0f1b77cd66"
+  },
+  "firstName": "Bogdan",
+  "lastName": "Kirilenko",
+  "userName": "kirpich",
+  "interests": [
+    "swimming"
+  ],
+  "address": {},
+  "followerIDs": [
+    "670d6a788551fc0f1b77cd68",
+    "670d65f7a0404e42cb4dd6e8",
+    "670d69818551fc0f1b77cd64"
+  ],
+  "followingIDs": [
+    "670d69c18551fc0f1b77cd65",
+    "670d68c78551fc0f1b77cd60"
+  ],
+  "email": "bodya@gmail.com",
+  "password": "kirpich"
+},
+{
+  "_id": {
+    "$oid": "670d6a288551fc0f1b77cd67"
+  },
+  "firstName": "Galya",
+  "lastName": "Chopyk",
+  "userName": "vasylivna",
+  "interests": [
+    "cycling"
+  ],
+  "address": {},
+  "followerIDs": [
+    "670d65f7a0404e42cb4dd6e8",
+    "670fac8f4c79300d0a64f019"
+  ],
+  "followingIDs": [
+    "670d65f7a0404e42cb4dd6e8",
+    "670d67fd995e297d00b671a6"
+  ],
+  "email": "galya@gmail.com",
+  "password": "vasylivna"
+},
+{
+  "_id": {
+    "$oid": "670d6a788551fc0f1b77cd68"
+  },
+  "firstName": "Maksym",
+  "lastName": "Kazionov",
+  "userName": "kazik",
+  "interests": [
+    "swimming"
+  ],
+  "address": {},
+  "followerIDs": [
+    "670d65f7a0404e42cb4dd6e8",
+    "670d69818551fc0f1b77cd64",
+    "670fac8f4c79300d0a64f019"
+  ],
+  "followingIDs": [
+    "670d65f7a0404e42cb4dd6e8",
+    "670d69f68551fc0f1b77cd66",
+    "670d69818551fc0f1b77cd64",
+    "670d69c18551fc0f1b77cd65",
+    "670d68c78551fc0f1b77cd60",
+    "670d69098551fc0f1b77cd61",
+    "670d69378551fc0f1b77cd62",
+    "670d695a8551fc0f1b77cd63"
+  ],
+  "email": "kazik@gmail.com",
+  "password": "kazik"
+},
+{
+  "_id": {
+    "$oid": "670fac8f4c79300d0a64f019"
+  },
+  "firstName": "Oleh",
+  "lastName": "Haiduchok",
+  "userName": "Eiengor",
+  "interests": [
+    "Philosophy"
+  ],
+  "address": {
+    "city": "Lviv",
+    "country": "Won't tell",
+    "planet": "Mars"
+  },
+  "followerIDs": [
+    "6710fb05185b41d0b7bd0865"
+  ],
+  "followingIDs": [
+    "670d65f7a0404e42cb4dd6e8",
+    "670d6a788551fc0f1b77cd68",
+    "670d68c78551fc0f1b77cd60",
+    "670d67fd995e297d00b671a6",
+    "670d6a288551fc0f1b77cd67"
+  ],
+  "email": "memchik2017@gmail.com",
+  "password": "12345678"
+},
+{
+  "_id": {
+    "$oid": "6710fb05185b41d0b7bd0865"
+  },
+  "firstName": "hgfuy",
+  "lastName": "hjrd",
+  "userName": "ion",
+  "interests": [
+    "maths"
+  ],
+  "address": {
+    "city": "Lviv",
+    "country": "Ukraine",
+    "planet": "Earth"
+  },
+  "followerIDs": [],
+  "followingIDs": [
+    "670d65f7a0404e42cb4dd6e8",
+    "670fac8f4c79300d0a64f019"
+  ],
+  "email": "ion",
+  "password": "7"
+}]

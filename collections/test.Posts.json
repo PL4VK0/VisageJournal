@@ -1,0 +1,339 @@
+[{
+  "_id": {
+    "$oid": "670d6619a0404e42cb4dd6e9"
+  },
+  "posterUserName": "PL4VK0",
+  "postTitle": "MYFIRSTPOST",
+  "postText": "This is really my first post",
+  "upVotes": [
+    "670d65f7a0404e42cb4dd6e8",
+    "670d6a288551fc0f1b77cd67",
+    "670fac8f4c79300d0a64f019",
+    "6710fb05185b41d0b7bd0865"
+  ],
+  "downVotes": [
+    "670d6741df7282fc1410a926"
+  ],
+  "date": {
+    "$date": "2024-10-14T18:42:33.696Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "670d6789df7282fc1410a927"
+  },
+  "posterUserName": "irynasav",
+  "postTitle": "Iryna'sFirstPost",
+  "postText": "This is awesome",
+  "upVotes": [],
+  "downVotes": [],
+  "date": {
+    "$date": "2024-10-14T18:48:41.440Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "670d6818995e297d00b671a7"
+  },
+  "posterUserName": "Vergil",
+  "postTitle": "Vergil",
+  "postText": "Vergil",
+  "upVotes": [],
+  "downVotes": [
+    "670d65f7a0404e42cb4dd6e8",
+    "670d6a288551fc0f1b77cd67",
+    "670d67fd995e297d00b671a6"
+  ],
+  "date": {
+    "$date": "2024-10-14T18:51:04.735Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "670d6ac58551fc0f1b77cd69"
+  },
+  "posterUserName": "kazik",
+  "postTitle": "OurFirstTournament",
+  "postText": "the first swimming tournament of Ukraine",
+  "upVotes": [
+    "670d65f7a0404e42cb4dd6e8",
+    "670fac8f4c79300d0a64f019"
+  ],
+  "downVotes": [],
+  "date": {
+    "$date": "2024-10-14T19:02:29.796Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "670d6ae68551fc0f1b77cd6a"
+  },
+  "posterUserName": "kazik",
+  "postTitle": "Going For A Walk",
+  "postText": "everybody join us",
+  "upVotes": [
+    "670d6a788551fc0f1b77cd68",
+    "670d65f7a0404e42cb4dd6e8",
+    "670d69818551fc0f1b77cd64",
+    "670fac8f4c79300d0a64f019"
+  ],
+  "downVotes": [],
+  "date": {
+    "$date": "2024-10-14T19:03:02.671Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "670d6e50cf1df3bfae8a7482"
+  },
+  "posterUserName": "PL4VK0",
+  "postTitle": "mysecondpost",
+  "postText": "this is what it is",
+  "upVotes": [],
+  "downVotes": [
+    "670d65f7a0404e42cb4dd6e8",
+    "670d6a288551fc0f1b77cd67",
+    "670d6741df7282fc1410a926"
+  ],
+  "date": {
+    "$date": "2024-10-14T19:17:36.285Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "670d70578c1895f1e71b39ac"
+  },
+  "posterUserName": "Dante",
+  "postTitle": "Eating pizza",
+  "postText": "I won't share it, don't even try",
+  "upVotes": [
+    "670d68c78551fc0f1b77cd60",
+    "670d67fd995e297d00b671a6",
+    "670d69f68551fc0f1b77cd66",
+    "670d65f7a0404e42cb4dd6e8",
+    "670fac8f4c79300d0a64f019"
+  ],
+  "downVotes": [],
+  "date": {
+    "$date": "2024-10-14T19:26:15.587Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "670d72284f63a302c3373e59"
+  },
+  "posterUserName": "irynasav",
+  "postTitle": "Making some changes",
+  "postText": "Do i need to describe it???",
+  "upVotes": [
+    "670d6741df7282fc1410a926"
+  ],
+  "downVotes": [],
+  "date": {
+    "$date": "2024-10-14T19:34:00.682Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "670d728c4f63a302c3373e5a"
+  },
+  "posterUserName": "irynasav",
+  "postTitle": "Having a break",
+  "postText": "nothing is better than a cup of tea in the evening",
+  "upVotes": [
+    "670d6741df7282fc1410a926",
+    "6710fb05185b41d0b7bd0865"
+  ],
+  "downVotes": [],
+  "date": {
+    "$date": "2024-10-14T19:35:40.469Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "670d72ee554e1732f9fb6d9b"
+  },
+  "posterUserName": "toha",
+  "postTitle": "newAlbum",
+  "postText": "my rap skill has leveled up",
+  "upVotes": [
+    "670d69c18551fc0f1b77cd65",
+    "670d69f68551fc0f1b77cd66"
+  ],
+  "downVotes": [],
+  "date": {
+    "$date": "2024-10-14T19:37:18.102Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "670d732d554e1732f9fb6d9c"
+  },
+  "posterUserName": "toha",
+  "postTitle": "Joining the walk",
+  "postText": "Here with kazik, kirpich, butterfly and PL4VK0!",
+  "upVotes": [
+    "670d69c18551fc0f1b77cd65",
+    "670d69f68551fc0f1b77cd66",
+    "670d69818551fc0f1b77cd64"
+  ],
+  "downVotes": [],
+  "date": {
+    "$date": "2024-10-14T19:38:21.163Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "670d7404a622b0afca8ffb98"
+  },
+  "posterUserName": "vasylivna",
+  "postTitle": "Cycling in the park",
+  "postText": "Doing some cardio",
+  "upVotes": [
+    "670d6a288551fc0f1b77cd67",
+    "670fac8f4c79300d0a64f019"
+  ],
+  "downVotes": [],
+  "date": {
+    "$date": "2024-10-14T19:41:56.355Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "670d7417a622b0afca8ffb99"
+  },
+  "posterUserName": "vasylivna",
+  "postTitle": "Eating chocolates",
+  "postText": "YUM!",
+  "upVotes": [
+    "670d6a288551fc0f1b77cd67",
+    "670fac8f4c79300d0a64f019"
+  ],
+  "downVotes": [],
+  "date": {
+    "$date": "2024-10-14T19:42:15.925Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "670d746d922422f4b8781ac8"
+  },
+  "posterUserName": "Vergil",
+  "postTitle": "STOP IT",
+  "postText": "Don't bully me!",
+  "upVotes": [],
+  "downVotes": [],
+  "date": {
+    "$date": "2024-10-14T19:43:41.409Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "670d74bb922422f4b8781aca"
+  },
+  "posterUserName": "Vergil",
+  "postTitle": "dante is no longer my relative",
+  "postText": "he didn't want to share his pizza with me",
+  "upVotes": [
+    "670d67fd995e297d00b671a6",
+    "670d65f7a0404e42cb4dd6e8"
+  ],
+  "downVotes": [
+    "670fac8f4c79300d0a64f019"
+  ],
+  "date": {
+    "$date": "2024-10-14T19:44:59.626Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "670d750ee720c563937ae29b"
+  },
+  "posterUserName": "butterfly",
+  "postTitle": "newRecord",
+  "postText": "50 m butterfly in 0.1 seconds!!!",
+  "upVotes": [
+    "670d69818551fc0f1b77cd64",
+    "670fac8f4c79300d0a64f019"
+  ],
+  "downVotes": [],
+  "date": {
+    "$date": "2024-10-14T19:46:22.294Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "670d7538e720c563937ae29c"
+  },
+  "posterUserName": "butterfly",
+  "postTitle": "BreathHolding",
+  "postText": "after 30 minutes still doing great",
+  "upVotes": [
+    "670d69818551fc0f1b77cd64",
+    "670d6a788551fc0f1b77cd68",
+    "670d65f7a0404e42cb4dd6e8"
+  ],
+  "downVotes": [],
+  "date": {
+    "$date": "2024-10-14T19:47:04.798Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "670d7613ad0e590d25ad1868"
+  },
+  "posterUserName": "styylzed",
+  "postTitle": "new update in my facvourite game!",
+  "postText": "but i hasn't been released yet((",
+  "upVotes": [
+    "670d695a8551fc0f1b77cd63"
+  ],
+  "downVotes": [],
+  "date": {
+    "$date": "2024-10-14T19:50:43.964Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "670d764dad0e590d25ad1869"
+  },
+  "posterUserName": "styylzed",
+  "postTitle": "new gaming session",
+  "postText": "hop on",
+  "upVotes": [
+    "670d695a8551fc0f1b77cd63"
+  ],
+  "downVotes": [],
+  "date": {
+    "$date": "2024-10-14T19:51:41.838Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "670d7686f432a8e6c6531065"
+  },
+  "posterUserName": "qv1nti",
+  "postTitle": "some post",
+  "postText": "i don't want to describe it",
+  "upVotes": [],
+  "downVotes": [],
+  "date": {
+    "$date": "2024-10-14T19:52:38.159Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "670faf564c79300d0a64f01b"
+  },
+  "posterUserName": "Eiengor",
+  "postTitle": "BRAZILIAN RAP OR HOW TO BECOME INSANE!",
+  "postText": "Memories broken\nThe truth goes unspoken\nI have even forgotten my name!\nI don't know the season or what is the reason,\nI am standing here holding my blade!\nA desolate place without any trace\u000b...\nIt is me that I spite\nI stand up and fight\nThe only thing I know for real\n\nTHERE WILL BE\nBLOOOOD\nSHEEED\nthe men in the mirror nods his head\u000bTHE ONLY ONE\nLEFT\nwill ride upon a dragons back\nBecause the mountians don't give back what they take\nTHERE WILL BLOOD\nSHEEEED\nNA NA NANAN ANANNA NAAAAAA",
+  "upVotes": [
+    "670fac8f4c79300d0a64f019",
+    "6710fb05185b41d0b7bd0865"
+  ],
+  "downVotes": [],
+  "date": {
+    "$date": "2024-10-16T12:19:34.277Z"
+  }
+}]
