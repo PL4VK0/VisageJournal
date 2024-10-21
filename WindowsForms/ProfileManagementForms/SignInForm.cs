@@ -1,20 +1,4 @@
-﻿using BusinessLogic;
-using DAL.Beton;
-using DTO;
-using Microsoft.Extensions.Configuration;
-using MongoDB.Bson;
-using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace WindowsForms
+﻿namespace WindowsForms
 {
     public partial class SignInForm : Form
     {

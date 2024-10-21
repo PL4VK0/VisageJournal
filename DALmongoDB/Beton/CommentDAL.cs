@@ -1,9 +1,8 @@
-﻿using DAL.Abstract;
+﻿using DALmongoDB.Abstract;
 using DTO;
-using MongoDB.Bson;
 using MongoDB.Driver;
 
-namespace DAL.Beton
+namespace DALmongoDB.Beton
 {
     public class CommentDAL : ICommentDAL
     {

@@ -1,9 +1,8 @@
-﻿using DAL.Beton;
+﻿
+using DALmongoDB.Beton;
 using DTO;
-using MongoDB.Bson;
 using MongoDB.Driver;
 using System.Xml.Linq;
-
 namespace BusinessLogic
 {
     public class UserOptions

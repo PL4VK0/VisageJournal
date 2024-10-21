@@ -1,7 +1,6 @@
 ﻿using DTO;
-using MongoDB.Bson;
 
-namespace DAL.Abstract
+namespace DALmongoDB.Abstract
 {
     public interface IPostDAL
     {

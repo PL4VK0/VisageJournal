@@ -1,6 +1,6 @@
 ﻿using DTO;
 
-namespace DAL.Abstract
+namespace DALmongoDB.Abstract
 {
     public interface ICommentDAL
     {

@@ -1,8 +1,8 @@
-﻿using DAL.Abstract;
+﻿using DALmongoDB.Abstract;
 using DTO;
 using MongoDB.Driver;
 
-namespace DAL.Beton
+namespace DALmongoDB.Beton
 {
     public class UserDAL : IUserDAL
     {
