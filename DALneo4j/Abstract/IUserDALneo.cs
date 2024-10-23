@@ -1,8 +1,8 @@
 ﻿using DTO;
 
-namespace DALmongoDB.Abstract
+namespace DALneo4j.Abstract
 {
-    public interface IUserDAL
+    public interface IUserDALneo
     {
         void DeleteByID(string ID);
         List<User> GetAll();

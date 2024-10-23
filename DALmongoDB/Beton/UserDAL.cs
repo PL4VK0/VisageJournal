@@ -28,11 +28,12 @@ namespace DALmongoDB.Beton
                 throw new Exception("Password is mandatory!");
             if (user.Interests.Count==0||user.Interests==null)
                 throw new Exception("Interests are mandatory!");
-
-            if(collection.Find<User>( u=>u.Email==user.Email).FirstOrDefault()!=null)
+            if (collection.Find(u => u.UserName == user.UserName).FirstOrDefault() != null)
+                throw new Exception("There is already someone with this UserName!");
+            if (collection.Find( u=>u.Email==user.Email).FirstOrDefault()!=null)
                 throw new Exception("There is already someone with this E-mail!");
 
-
+            user.UserName = user.UserName.ToUpper();
 
             collection.InsertOne(user);
         }
@@ -56,6 +57,7 @@ namespace DALmongoDB.Beton
 
         public void Update(User user)
         {
+            var filter = Builders<User>.Filter.Eq(u=>u.UserID,user.UserID);
             var update = Builders<User>.Update.
                 Set(u => u.UserID, user.UserID).
                 Set(u => u.FirstName, user.FirstName).
@@ -67,7 +69,7 @@ namespace DALmongoDB.Beton
                 Set(u => u.Interests, user.Interests).
                 Set(u => u.FollowerIDs, user.FollowerIDs).
                 Set(u => u.FollowingIDs, user.FollowingIDs);
-            collection.UpdateOne(user.UserID, update);
+            collection.UpdateOne(filter, update);
         }
     }
 }

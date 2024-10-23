@@ -112,7 +112,7 @@ namespace WindowsForms
 
         private void btnFindByUserName_Click(object sender, EventArgs e)
         {
-            string potentialUserName = textBoxUserName.Text;
+            string potentialUserName = textBoxUserName.Text.ToUpper();
             User foundUser = userOptions.FindByUserName(potentialUserName);
             dgvUserSearch.DataSource = null;
             if (foundUser == null)
