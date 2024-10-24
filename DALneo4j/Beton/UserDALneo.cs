@@ -1,5 +1,6 @@
 ﻿using DALneo4j.Abstract;
 using DTO;
+using Neo4jClient.Cypher;
 
 namespace DALneo4j.Beton
 {
@@ -11,30 +12,38 @@ namespace DALneo4j.Beton
         {
             this.cmd = cmd;
         }
-
-
-
-        public void Add(User user)
+        async public Task Add(User user)
         {
-            
+            List<string> interests = new List<string>();
+            for (int j = 0; j < user.Interests.Count; j++)
+                interests.Add(user.Interests[j].AsString);
+            var dictUser = new Dictionary<string, object>
+                    {
+                        { "id",user.UserID.ToString()},
+                        { "userName", user.UserName },
+                        { "firstName", user.FirstName },
+                        { "lastName", user.LastName},
+                        {"email", user.Email },
+                        {"interests", interests}
+                    };
+            await cmd.CreateNode("User", dictUser);
+        }
+        async public Task DeleteByID(string ID)
+        {
+            await cmd.DetachDelete("User", "id", ID);
         }
 
-        public void DeleteByID(string ID)
-        {
-            
-        }
+        //public List<User> GetAll()
+        //{
+        //    return null;
+        //}
 
-        public List<User> GetAll()
-        {
-            return null;
-        }
+        //asypublic User GetByID(string ID)
+        //{
+        //    return null;
+        //}
 
-        public User GetByID(string ID)
-        {
-            return null;
-        }
-
-        public void Update(User user)
+        async public Task Update(User user)
         {
             
         }

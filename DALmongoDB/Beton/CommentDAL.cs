@@ -37,6 +37,7 @@ namespace DALmongoDB.Beton
 
         public void Update(Comment comment)
         {
+            var filter = Builders<Comment>.Filter.Eq(c => c.CommentID, comment.CommentID);
             var update = Builders<Comment>.Update
                 .Set(c=>c.CommentID,comment.CommentID)
                 .Set(c=>c.PostID, comment.PostID)
@@ -46,7 +47,7 @@ namespace DALmongoDB.Beton
                 .Set(c => c.UpVotes, comment.UpVotes)
                 .Set(c => c.DownVotes, comment.DownVotes);
 
-            collection.UpdateOne(comment.CommentID, update);
+            collection.UpdateOne(filter, update);
         }
     }
 }

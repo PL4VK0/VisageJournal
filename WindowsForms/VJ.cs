@@ -1,4 +1,6 @@
 using BusinessLogic;
+using DALneo4j;
+using DALneo4j.Beton;
 using DTO;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
@@ -20,11 +22,12 @@ namespace WindowsForms
             IMongoCollection<User> userCollecion = db.GetCollection<User>("Users");
             IMongoCollection<Post> postCollection = db.GetCollection<Post>("Posts");
             IMongoCollection<Comment> commentCollection = db.GetCollection<Comment>("Comments");
-
+            Neo4JCommands cmd = new Neo4JCommands("neo4j+s://81ba7aa4.databases.neo4j.io", "neo4j", "vLTbyIDajDgR9zpPMa4pxD3bYlivHkJC5OZOTyYfG9s");
+            UserDALneo userDALneo = new UserDALneo(cmd);
             //UserDAL uDAL = new UserDAL(userCollecion);
             //PostDAL pDAL= new PostDAL(postCollection);
             //CommentDAL cDAL  = new CommentDAL(commentCollection
-            userOptions = new UserOptions(userCollecion, postCollection, commentCollection);
+            userOptions = new UserOptions(userCollecion, postCollection, commentCollection,cmd,userDALneo);
         }
 
         private void Form1_Load(object sender, EventArgs e)

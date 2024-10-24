@@ -23,6 +23,27 @@ PostDAL postDAL = new PostDAL(postCollection);
 CommentDAL commentDAL = new CommentDAL(commentCollection);
 
 
+
+/*
+var posts = postDAL.GetAll();
+foreach (var post in posts)
+{
+    var postToUpdate = post;
+    postToUpdate.PosterUserName = postToUpdate.PosterUserName.ToUpper();
+    postDAL.Update(postToUpdate);
+}
+
+var comments = commentDAL.GetAll();
+
+foreach (var comment in comments)
+{
+    var commentToUpdate = comment;
+    commentToUpdate.PosterUserName = commentToUpdate.PosterUserName.ToUpper();
+    commentToUpdate.CommentatorUserName = commentToUpdate.CommentatorUserName.ToUpper();
+    commentDAL.Update(commentToUpdate);
+}
+*/
+
 /*Dictionary<string, object> data1 = new Dictionary<string, object>
 {
     {
@@ -53,8 +74,10 @@ await using (var session = driver.AsyncSession())
 //just added all of the users and relations
 ///*    tout est facile!
 Neo4JCommands neoCMD = new Neo4JCommands("neo4j+s://81ba7aa4.databases.neo4j.io", "neo4j", "vLTbyIDajDgR9zpPMa4pxD3bYlivHkJC5OZOTyYfG9s");
-List<User> users = uDal.GetAll();
-await TransferUsersFromMongoToNeo.DoTheThing(users);
+
+Console.WriteLine(await neoCMD.ShortestPath("User", "User", "userName", "userName", "IRYNASAV", "STYYLZED", "FOLLOWS"));
+//List<User> users = uDal.GetAll();
+//await TransferUsersFromMongoToNeo.DoTheThing(users);
 //*/
 
 /*

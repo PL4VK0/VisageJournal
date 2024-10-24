@@ -40,6 +40,7 @@ namespace DALmongoDB.Beton
 
         public void Update(Post post)
         {
+            var filter = Builders<Post>.Filter.Eq(p=>p.PostID, post.PostID);
             var update = Builders<Post>.Update
                 .Set(p => p.PostID, post.PostID)
                 .Set(p => p.PosterUserName, post.PosterUserName)
@@ -49,7 +50,7 @@ namespace DALmongoDB.Beton
                 .Set(p => p.UpVotes, post.UpVotes)
                 .Set(p => p.DownVotes, post.DownVotes);
 
-            collection.UpdateOne(post.PostID, update);
+            collection.UpdateOne(filter, update);
         }
     }
 }
