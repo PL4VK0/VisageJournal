@@ -90,14 +90,14 @@ namespace DALneo4j
                                              string VALUE1,
                                              string VALUE2,
                                              string RELATIONSHIP,
-                                             int MAXDEPTH = 4)
+                                             int MAXDEPTH = 3)
         {
             int pathLength = 0;
             await using(var session = driver.AsyncSession())
             {
                 await session.ExecuteWriteAsync(async t =>
                 {
-                    var cmd = $@"match (a:{COLLECTION1} {{{PROPERTY1}:$value1}}), (b:{COLLECTION2} {{{PROPERTY2}:$value2}}), l = shortestPath((a)-[:{RELATIONSHIP} *1..{MAXDEPTH}]-(b)) return length(l) as length";
+                    var cmd = $@"match (a:{COLLECTION1} {{{PROPERTY1}:$value1}}), (b:{COLLECTION2} {{{PROPERTY2}:$value2}}), l = shortestPath((a)-[:{RELATIONSHIP} *1..{MAXDEPTH}]->(b)) return length(l) as length";
                     var queryRes = await t.RunAsync(cmd, new { value1 = VALUE1, value2 = VALUE2 });
                     var singleRecord = await queryRes.SingleAsync();
                     pathLength = singleRecord["length"].As<int>();

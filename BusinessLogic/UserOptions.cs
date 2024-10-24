@@ -54,11 +54,11 @@ namespace BusinessLogic
         public void SignIn(string emailOrUserName, string password)
         {
             //checking email
-            User userToSignIn = userCollection.Find(u => u.Email == emailOrUserName).FirstOrDefault();
+            User userToSignIn = userCollection.Find(u => u.Email.ToUpper() == emailOrUserName.ToUpper()).FirstOrDefault();
             if (userToSignIn == null)
             {
                 //checking uN
-                userToSignIn = userCollection.Find(u => u.UserName == emailOrUserName).FirstOrDefault();
+                userToSignIn = userCollection.Find(u => u.UserName.ToUpper() == emailOrUserName.ToUpper()).FirstOrDefault();
                 if (userToSignIn == null)
                     throw new Exception("There is no one with this Email or UserName!");
             }
@@ -178,10 +178,10 @@ namespace BusinessLogic
             return foundUser;
         }
 
-        async public Task<int> ShortestPath(string userToFindID)
+        async public Task<int> ShortestPath(string userThatLooksID,string userToLookForID)
         {
             int length = -1;
-            length = await neo4jCommands.ShortestPath("User", "User", "id", "id", user.UserID, userToFindID, "FOLLOWS");
+            length = await neo4jCommands.ShortestPath("User", "User", "id", "id", userThatLooksID, userToLookForID, "FOLLOWS");
             return length;
         }
         //---------------------------------------------------------------------------------

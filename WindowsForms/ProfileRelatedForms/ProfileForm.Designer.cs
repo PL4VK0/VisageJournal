@@ -40,6 +40,7 @@
             lblInterests = new Label();
             lblAddress = new Label();
             richTextBoxAddress = new RichTextBox();
+            lblMutualFollowings = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvUserPosts).BeginInit();
             SuspendLayout();
             // 
@@ -163,12 +164,22 @@
             richTextBoxAddress.TabIndex = 13;
             richTextBoxAddress.Text = "";
             // 
+            // lblMutualFollowings
+            // 
+            lblMutualFollowings.AutoSize = true;
+            lblMutualFollowings.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Bold);
+            lblMutualFollowings.Location = new Point(13, 364);
+            lblMutualFollowings.Name = "lblMutualFollowings";
+            lblMutualFollowings.Size = new Size(0, 20);
+            lblMutualFollowings.TabIndex = 14;
+            // 
             // ProfileForm
             // 
             AutoScaleDimensions = new SizeF(10F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaption;
             ClientSize = new Size(688, 499);
+            Controls.Add(lblMutualFollowings);
             Controls.Add(richTextBoxAddress);
             Controls.Add(lblAddress);
             Controls.Add(lblInterests);
@@ -205,5 +216,6 @@
         private Label lblInterests;
         private Label lblAddress;
         private RichTextBox richTextBoxAddress;
+        private Label lblMutualFollowings;
     }
 }

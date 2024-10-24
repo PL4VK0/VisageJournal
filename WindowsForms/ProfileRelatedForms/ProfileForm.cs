@@ -1,4 +1,5 @@
 ﻿using DTO;
+using Neo4j.Driver;
 
 namespace WindowsForms
 {
@@ -62,7 +63,7 @@ namespace WindowsForms
             beginPost.ShowDialog();
             Refresh();
         }
-        private void Refresh()
+        async private void Refresh()
         {
             dgvUserPosts.DataSource = null;
             dgvUserPosts.DataSource = new BindingSource { DataSource = VJ.userOptions.GetAllPostsFromThisUser(user).OrderByDescending(p => p.Date).ToList() };
@@ -83,6 +84,51 @@ namespace WindowsForms
                 btnFollow.Text = "UnFollow";
             else
                 btnFollow.Text = "Follow";
+            if(user.UserID!=VJ.userOptions.GetUser().UserID)
+            {
+                int pathLengthTo = 0;
+                int pathLengthFrom = 0;
+                bool failedOnce = false;
+                try
+                {
+                    pathLengthTo = Convert.ToInt32(await VJ.userOptions.ShortestPath(VJ.userOptions.GetUser().UserID, user.UserID));
+                }catch
+                { failedOnce = true; }
+                try
+                {
+                    pathLengthFrom = Convert.ToInt32(await VJ.userOptions.ShortestPath(user.UserID, VJ.userOptions.GetUser().UserID));
+                }
+                catch
+                { 
+                    if(failedOnce)
+                    {
+                        lblMutualFollowings.Text = "You don't have close\nfollowers\\followings";
+                        return;
+                    }
+                }
+                if(pathLengthTo==1&&pathLengthFrom==1)
+                {
+                    lblMutualFollowings.Text = "You follow\neach other";
+                    return;
+                }
+                if (pathLengthTo == 1)
+                {
+                    lblMutualFollowings.Text = "";
+                    return;
+                }
+                if (pathLengthFrom == 1)
+                {
+                    lblMutualFollowings.Text = "Follows you";
+                    return;
+                }
+                if(pathLengthTo<=pathLengthFrom)
+                {
+                    lblMutualFollowings.Text = $"You are {pathLengthTo - 1}\nfollowing(s)\nacross";
+                    return;
+                }
+                lblMutualFollowings.Text = $"You are {pathLengthTo - 1}\follower(s)\nacross";
+                return;
+            }
         }
 
         private void btnDeleteAccount_Click(object sender, EventArgs e)
