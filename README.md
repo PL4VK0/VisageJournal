@@ -18,5 +18,6 @@ FOLLOWS relationship view in graph form
 
 
 postsAndCommentsAreInSingleTable(i think this is how it was supposed to be)
-![postsAndCommentsAreInSingleTable(i think this is how it was supposed to be)](https://github.com/user-attachments/assets/7bafffa0-c8f1-4e37-82cf-21363df6afdf)
+![image](https://github.com/user-attachments/assets/a64e4d03-3a2f-4b9d-9370-748d2d381a61)
+
 
