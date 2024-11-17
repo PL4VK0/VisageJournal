@@ -11,9 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WindowsForms", "WindowsForm
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLogic", "BusinessLogic\BusinessLogic.csproj", "{D7380197-DFCF-4CAF-83CE-0A5FF6D505FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DALneo4j", "DALneo4j\DALneo4j.csproj", "{03ECAF52-6D75-4ABF-BCBB-CFE15EE4049B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DALneo4j", "DALneo4j\DALneo4j.csproj", "{03ECAF52-6D75-4ABF-BCBB-CFE15EE4049B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DALmongoDB", "DALmongoDB\DALmongoDB.csproj", "{A95D7FE4-DC68-469F-A4FF-0BD1F5EED2F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DALdynamoDB", "DALdynamoDB\DALdynamoDB.csproj", "{EF8F04FC-ECCD-4C06-845A-BB60E9AB1F9E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{A95D7FE4-DC68-469F-A4FF-0BD1F5EED2F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A95D7FE4-DC68-469F-A4FF-0BD1F5EED2F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A95D7FE4-DC68-469F-A4FF-0BD1F5EED2F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF8F04FC-ECCD-4C06-845A-BB60E9AB1F9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF8F04FC-ECCD-4C06-845A-BB60E9AB1F9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF8F04FC-ECCD-4C06-845A-BB60E9AB1F9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF8F04FC-ECCD-4C06-845A-BB60E9AB1F9E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

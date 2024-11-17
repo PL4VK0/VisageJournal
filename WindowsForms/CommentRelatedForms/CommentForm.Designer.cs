@@ -35,6 +35,7 @@
             btnDownVoteComment = new Button();
             lblRating = new Label();
             lblRatingCount = new Label();
+            btnUpdateComment = new Button();
             SuspendLayout();
             // 
             // lblUsersPost
@@ -66,6 +67,7 @@
             richTextBoxCommentText.Size = new Size(333, 241);
             richTextBoxCommentText.TabIndex = 2;
             richTextBoxCommentText.Text = "CommentText";
+            richTextBoxCommentText.TextChanged += richTextBoxCommentText_TextChanged;
             // 
             // btnUpVoteComment
             // 
@@ -105,12 +107,25 @@
             lblRatingCount.TabIndex = 6;
             lblRatingCount.Text = "0";
             // 
+            // btnUpdateComment
+            // 
+            btnUpdateComment.Enabled = false;
+            btnUpdateComment.Location = new Point(247, 83);
+            btnUpdateComment.Name = "btnUpdateComment";
+            btnUpdateComment.Size = new Size(94, 29);
+            btnUpdateComment.TabIndex = 7;
+            btnUpdateComment.Text = "Update";
+            btnUpdateComment.UseVisualStyleBackColor = true;
+            btnUpdateComment.Visible = false;
+            btnUpdateComment.Click += btnUpdateComment_Click;
+            // 
             // CommentForm
             // 
             AutoScaleDimensions = new SizeF(11F, 23F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaption;
             ClientSize = new Size(394, 442);
+            Controls.Add(btnUpdateComment);
             Controls.Add(lblRatingCount);
             Controls.Add(lblRating);
             Controls.Add(btnDownVoteComment);
@@ -137,5 +152,6 @@
         private Button btnDownVoteComment;
         private Label lblRating;
         private Label lblRatingCount;
+        private Button btnUpdateComment;
     }
 }

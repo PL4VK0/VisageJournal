@@ -16,6 +16,13 @@ namespace WindowsForms
             lblUsersPost.Text = comment.PosterUserName + "'s Post";
             lblUsersComment.Text = comment.CommentatorUserName + "'s Comment";
             richTextBoxCommentText.Text = comment.CommentText;
+            richTextBoxCommentText.ReadOnly = true;
+            if (comment.CommentatorUserName == VJ.userOptions.GetUser().UserName)
+            {
+                richTextBoxCommentText.ReadOnly = false;
+                btnUpdateComment.Visible = true;
+            }
+
             Refresh();
         }
         void Refresh()
@@ -58,6 +65,23 @@ namespace WindowsForms
             if (comment.UpVotes.Contains(VJ.userOptions.GetUser().UserID))
                 VJ.userOptions.RemoveCommentUpVote(comment);
             VJ.userOptions.DownVoteComment(comment);
+            Refresh();
+        }
+
+        private void richTextBoxCommentText_TextChanged(object sender, EventArgs e)
+        {
+            if (comment.CommentText != richTextBoxCommentText.Text&&!string.IsNullOrEmpty(richTextBoxCommentText.Text))
+                btnUpdateComment.Enabled = true;
+            else
+                btnUpdateComment.Enabled = false;
+        }
+
+        private async void btnUpdateComment_Click(object sender, EventArgs e)
+        {
+            comment.CommentText = richTextBoxCommentText.Text+" [UPDATED]";
+            comment.Date = DateTime.Now;
+            await VJ.userOptions.UpdateComment(comment);
+            MessageBox.Show("UPDATED SUCCESSFULLY!","NO ERER",MessageBoxButtons.OK, MessageBoxIcon.Information);
             Refresh();
         }
     }

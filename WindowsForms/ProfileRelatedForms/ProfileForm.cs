@@ -126,7 +126,7 @@ namespace WindowsForms
                     lblMutualFollowings.Text = $"You are {pathLengthTo - 1}\nfollowing(s)\nacross";
                     return;
                 }
-                lblMutualFollowings.Text = $"You are {pathLengthTo - 1}\follower(s)\nacross";
+                lblMutualFollowings.Text = $"You are {pathLengthTo - 1}\nfollower(s)\nacross";
                 return;
             }
         }
@@ -142,7 +142,7 @@ namespace WindowsForms
             for (int i = dgvUserPosts.SelectedRows.Count - 1; i >= 0d; i--)
             {
                 Post selectedPost = dgvUserPosts.SelectedRows[i].DataBoundItem as Post;
-                VJ.userOptions.RemovePost(selectedPost);
+                VJ.userOptions.RemovePostAsync(selectedPost);
             }
             Refresh();
             //Post item = dgvUserPosts.SelectedRows[0].DataBoundItem as Post;

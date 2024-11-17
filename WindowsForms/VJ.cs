@@ -1,4 +1,7 @@
+using Amazon;
+using Amazon.DynamoDBv2;
 using BusinessLogic;
+using DALdynamoDB.Beton;
 using DALneo4j;
 using DALneo4j.Beton;
 using DTO;
@@ -24,10 +27,13 @@ namespace WindowsForms
             IMongoCollection<Comment> commentCollection = db.GetCollection<Comment>("Comments");
             Neo4JCommands cmd = new Neo4JCommands("neo4j+s://81ba7aa4.databases.neo4j.io", "neo4j", "vLTbyIDajDgR9zpPMa4pxD3bYlivHkJC5OZOTyYfG9s");
             UserDALneo userDALneo = new UserDALneo(cmd);
-            //UserDAL uDAL = new UserDAL(userCollecion);
-            //PostDAL pDAL= new PostDAL(postCollection);
-            //CommentDAL cDAL  = new CommentDAL(commentCollection
-            userOptions = new UserOptions(userCollecion, postCollection, commentCollection,cmd,userDALneo);
+            string accessKey = config.GetConnectionString("DynamoAccessKey");
+            string secretKey = config.GetConnectionString("DynamoSecretKey");
+            var region = RegionEndpoint.EUNorth1;
+            AmazonDynamoDBClient dynamodbclient = new AmazonDynamoDBClient(accessKey,secretKey,region);
+            CommentDALdynamo commentDALdynamo = new CommentDALdynamo(dynamodbclient);
+            PostDALdynamo postDALdynamo = new PostDALdynamo(dynamodbclient);
+            userOptions = new UserOptions(userCollecion, postCollection, commentCollection,cmd,userDALneo,postDALdynamo,commentDALdynamo);
         }
 
         private void Form1_Load(object sender, EventArgs e)

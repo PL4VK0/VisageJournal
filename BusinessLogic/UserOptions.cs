@@ -1,13 +1,10 @@
 ﻿
+using DALdynamoDB.Beton;
 using DALmongoDB.Beton;
 using DALneo4j;
 using DALneo4j.Beton;
 using DTO;
-using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Xml.Linq;
 namespace BusinessLogic
 {
     public class UserOptions
@@ -20,11 +17,16 @@ namespace BusinessLogic
         private readonly IMongoCollection<Comment> commentCollection;
         private readonly Neo4JCommands neo4jCommands;
         private readonly UserDALneo userDALneo;
+        private readonly CommentDALdynamo commentDALdynamo;
+        private readonly PostDALdynamo postDALdynamo;
         private User user = null;
         public UserOptions(IMongoCollection<User> userCollection,
                            IMongoCollection<Post> postCollection,
                            IMongoCollection<Comment> commentCollection,
-                           Neo4JCommands cmd,UserDALneo userDALneo)
+                           Neo4JCommands cmd,
+                           UserDALneo userDALneo,
+                           PostDALdynamo postDALdynamo,
+                           CommentDALdynamo commentDALdynamo)
         {
             this.userCollection = userCollection;
             this.postCollection = postCollection;
@@ -34,9 +36,11 @@ namespace BusinessLogic
             commentDAL = new CommentDAL(commentCollection);
             neo4jCommands = cmd;
             this.userDALneo = userDALneo;
+            this.postDALdynamo = postDALdynamo;
+            this.commentDALdynamo = commentDALdynamo;
         }
-//------------------------------------------------------------------------------------------------------------------
-//user related stuff
+        //------------------------------------------------------------------------------------------------------------------
+        //user related stuff
         public User GetUser()
         {
             return user;
@@ -164,7 +168,7 @@ namespace BusinessLogic
 
 
             foreach (var userPost in userPosts)
-                RemovePost(userPost);
+                await RemovePostAsync(userPost);
 
             //unalive account
             var filter = Builders<User>.Filter.Eq(u => u.UserID, user.UserID);
@@ -203,17 +207,19 @@ namespace BusinessLogic
                 posts.AddRange(myPosts);
             return posts;
         }
-        public void NewPostFromThisUser(string postTitle, string postText)
+        public async Task NewPostFromThisUserAsync(string postTitle, string postText)
         {
             Post newPost = new Post();
             newPost.PosterUserName = user.UserName;
             newPost.PostTitle = postTitle;
             newPost.PostText = postText;
             postDAL.Add(newPost);
+            await postDALdynamo.Add(newPost);
         }
         public List<Post> GetAllPostsFromThisUser(User user)
         {
-            var filter = Builders<Post>.Filter.Eq(p => p.PosterUserName, user.UserName);
+            string userNameUpper = user.UserName.ToUpper();
+            var filter = Builders<Post>.Filter.Eq(p => p.PosterUserName, user.UserName.ToUpper());
             return postCollection.Find(filter).ToList();
         }
         public void UpVotePost(Post post)
@@ -248,7 +254,7 @@ namespace BusinessLogic
                 .Set(p => p.DownVotes, post.DownVotes);
             postCollection.UpdateOne(filter, updatePost);
         }
-        public void RemovePost(Post post)
+        public async Task RemovePostAsync(Post post)
         {
             var commentFilter = Builders<Comment>.Filter.Eq(c=>c.PosterUserName, post.PosterUserName);
             commentCollection.DeleteMany(commentFilter);
@@ -256,12 +262,14 @@ namespace BusinessLogic
 
             var filter = Builders<Post>.Filter.Eq(post => post.PostID,post.PostID);
             postCollection.DeleteOne(filter);
+            await postDALdynamo.Delete(post);
         }
         //---------------------------------------------------------------------------------------------------
         //comment related stuff
-        public void NewCommentFromThisUser(Comment comment)
+        public async Task NewCommentFromThisUserAsync(Comment comment)
         {
             commentDAL.Add(comment);
+            await commentDALdynamo.Add(comment);
         }
         public List<Comment> GetAllCommentsFromThisPost(Post post)
         {
@@ -302,10 +310,20 @@ namespace BusinessLogic
 
             commentCollection.UpdateOne(filter, updateComment);
         }
-        public void RemoveComment(Comment comment)
+        public async Task RemoveCommentAsync(Comment comment)
         {
             var filter = Builders<Comment>.Filter.Eq(c => c.CommentID, comment.CommentID);
             commentCollection.DeleteOne(filter);
+            await commentDALdynamo.Delete(comment);
+        }
+        public async Task UpdateComment(Comment comment)
+        {
+            var filter = Builders<Comment>.Filter.Eq(c => c.CommentID, comment.CommentID);
+            var updateComment = Builders<Comment>.Update
+                .Set(c=>c.CommentText, comment.CommentText)
+                .Set(c=>c.Date, comment.Date);
+            commentCollection.UpdateOne(filter, updateComment);
+            await commentDALdynamo.Update(comment);
         }
     }
 }

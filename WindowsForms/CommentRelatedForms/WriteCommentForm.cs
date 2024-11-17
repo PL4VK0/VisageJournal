@@ -24,7 +24,7 @@ namespace WindowsForms.CommentRelatedForms
             comment.CommentText = commentText;
             comment.CommentatorUserName = VJ.userOptions.GetUser().UserName;
             comment.PosterUserName = post.PosterUserName;
-            VJ.userOptions.NewCommentFromThisUser(comment);
+            VJ.userOptions.NewCommentFromThisUserAsync(comment);
             MessageBox.Show("Commented Successfully!");
             Close();
         }

@@ -38,6 +38,7 @@
             dgvPostComments = new DataGridView();
             lblPostComments = new Label();
             btnBeginAddComment = new Button();
+            btnOrderComments = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvPostComments).BeginInit();
             SuspendLayout();
             // 
@@ -141,12 +142,23 @@
             btnBeginAddComment.UseVisualStyleBackColor = true;
             btnBeginAddComment.Click += btnBeginAddComment_Click;
             // 
+            // btnOrderComments
+            // 
+            btnOrderComments.Location = new Point(793, 115);
+            btnOrderComments.Name = "btnOrderComments";
+            btnOrderComments.Size = new Size(94, 29);
+            btnOrderComments.TabIndex = 10;
+            btnOrderComments.Text = "Desc";
+            btnOrderComments.UseVisualStyleBackColor = true;
+            btnOrderComments.Click += btnOrderComments_Click;
+            // 
             // PostForm
             // 
             AutoScaleDimensions = new SizeF(11F, 23F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaption;
             ClientSize = new Size(962, 526);
+            Controls.Add(btnOrderComments);
             Controls.Add(btnBeginAddComment);
             Controls.Add(lblPostComments);
             Controls.Add(dgvPostComments);
@@ -180,5 +192,6 @@
         private DataGridView dgvPostComments;
         private Label lblPostComments;
         private Button btnBeginAddComment;
+        private Button btnOrderComments;
     }
 }

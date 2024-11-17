@@ -6,6 +6,7 @@ namespace WindowsForms
     public partial class PostForm : Form
     {
         public Post post = null;
+        private bool ascOrders = false;
         public PostForm(Post post)
         {
             this.post = post;
@@ -49,7 +50,12 @@ namespace WindowsForms
             lblCountRating.Text = Convert.ToString(post.UpVotes.Count - post.DownVotes.Count);
 
 
-            List<Comment> postComments = VJ.userOptions.GetAllCommentsFromThisPost(post).OrderByDescending(c=>c.Date).ToList();
+
+            List<Comment> postComments;
+            if (ascOrders)
+                postComments = VJ.userOptions.GetAllCommentsFromThisPost(post).OrderBy(c => c.Date).ToList();
+            else 
+                postComments = VJ.userOptions.GetAllCommentsFromThisPost(post).OrderByDescending(c => c.Date).ToList();
             dgvPostComments.DataSource = new BindingSource { DataSource = postComments };
             dgvPostComments.Columns["CommentID"].Visible = false;
             dgvPostComments.Columns["Date"].Visible = false;
@@ -72,6 +78,7 @@ namespace WindowsForms
             Comment comment = (Comment)dgvPostComments.Rows[e.RowIndex].DataBoundItem;
             CommentForm commentForm = new CommentForm(comment);
             commentForm.ShowDialog();
+            Refresh();
         }
 
         private void btnDownVote_Click(object sender, EventArgs e)
@@ -92,6 +99,16 @@ namespace WindowsForms
         {
             WriteCommentForm addCommentForm = new WriteCommentForm(post);
             addCommentForm.ShowDialog();
+            Refresh();
+        }
+
+        private void btnOrderComments_Click(object sender, EventArgs e)
+        {
+            if (ascOrders)
+                btnOrderComments.Text = "Desc";
+            else
+                btnOrderComments.Text = "Asc";
+            ascOrders = !ascOrders;
             Refresh();
         }
     }

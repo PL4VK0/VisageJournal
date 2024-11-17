@@ -1,4 +1,8 @@
-﻿using DALmongoDB.Beton;
+﻿using Amazon;
+using Amazon.DynamoDBv2;
+using Amazon.DynamoDBv2.DataModel;
+using Amazon.Runtime;
+using DALmongoDB.Beton;
 using DALneo4j;
 using DTO;
 using Microsoft.Extensions.Configuration;
@@ -22,9 +26,50 @@ PostDAL postDAL = new PostDAL(postCollection);
 
 CommentDAL commentDAL = new CommentDAL(commentCollection);
 
+string accessKey = config.GetConnectionString("DynamoAccessKey");
+string secretKey = config.GetConnectionString("DynamoSecretKey");
+var credentials = new BasicAWSCredentials(accessKey, secretKey);
+var region = RegionEndpoint.EUNorth1;
+//Console.WriteLine(accessKey);
+//Console.WriteLine(secretKey);
 
+using AmazonDynamoDBClient _dynamoDBclient = new AmazonDynamoDBClient(credentials,region);
+DynamoDBContext context = new DynamoDBContext(_dynamoDBclient);
+
+//List<Post> posts = await context.QueryAsync<Post>("PL4VK0").GetRemainingAsync();
+//foreach (Post post in posts)
+//    Console.WriteLine(post.PostTitle);
+
+//Post post = await context.LoadAsync<Post>("670d7417a622b0afca8ffb99", "VASYLIVNA");
+//Console.WriteLine(post.PostTitle);
+await TransferPostsAndCommentsFromMongoToDynamo.DoTheThing(_dynamoDBclient,postDAL.GetAll(),commentDAL.GetAll());
+//await context.SaveAsync(new Comment
+//{
+//    CommentID = "c2",
+//    CommentatorUserName = "IAM",
+//    CommentText = "THIS IS MY COMMENT TEXT",
+//    PosterUserName = "ANOTHER USER",
+//    PostID = "1",
+//    Date = DateTime.Now
+//});
+//await context.SaveAsync(new Post
+//{
+//    PosterUserName = "PL4VK0",
+//    PostID = "1",
+//    Date = DateTime.Now,
+//    PostText = "THIS IS POST TEXT",
+//    PostTitle = "POST TITLE",
+//});
 
 /*
+var users = uDal.GetAll();
+foreach (var user in users)
+{
+    var userToUpdate = user;
+    userToUpdate.UserName = userToUpdate.UserName.ToUpper();
+    uDal.Update(userToUpdate);
+}
+
 var posts = postDAL.GetAll();
 foreach (var post in posts)
 {
@@ -72,13 +117,13 @@ await using (var session = driver.AsyncSession())
 */
 
 //just added all of the users and relations
-///*    tout est facile!
+/*    tout est facile!
 Neo4JCommands neoCMD = new Neo4JCommands("neo4j+s://81ba7aa4.databases.neo4j.io", "neo4j", "vLTbyIDajDgR9zpPMa4pxD3bYlivHkJC5OZOTyYfG9s");
 
 Console.WriteLine(await neoCMD.ShortestPath("User", "User", "userName", "userName", "IRYNASAV", "STYYLZED", "FOLLOWS"));
 //List<User> users = uDal.GetAll();
 //await TransferUsersFromMongoToNeo.DoTheThing(users);
-//*/
+*/
 
 /*
 List<string> interests = new List<string>();

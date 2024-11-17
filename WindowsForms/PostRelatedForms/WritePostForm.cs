@@ -13,7 +13,7 @@
             string postText = richTextBoxPostText.Text;
             try
             {
-                VJ.userOptions.NewPostFromThisUser(postTitle,postText);
+                VJ.userOptions.NewPostFromThisUserAsync(postTitle,postText);
                 MessageBox.Show("Successfully added new post!", "HELL YEAH!", MessageBoxButtons.RetryCancel, MessageBoxIcon.Information);
                 Close();
             }catch (Exception ex)
