@@ -19,19 +19,25 @@ namespace DALdynamoDB.Beton
             _client = client;
             _context = new DynamoDBContext(_client);
         }
-        public async Task Add(Comment comment)
+        public async Task Add(CommentDynamo commentDynamo)
         {
-            await _context.SaveAsync<Comment>(comment);
+            await _context.SaveAsync<CommentDynamo>(commentDynamo);
         }
 
-        public async Task Delete(Comment comment)
+        public async Task Delete(string postID, string commentID)
         {
-            await _context.DeleteAsync<Comment>(comment);
+            await _context.DeleteAsync<CommentDynamo>(postID,commentID);
         }
 
-        public async Task Update(Comment comment)
+        public async Task<IEnumerable<CommentDynamo>> GetAllFromPost(string postID)
         {
-            await _context.SaveAsync<Comment>(comment);
+            var result = await _context.QueryAsync<CommentDynamo>(postID).GetRemainingAsync();
+            return result;
+        }
+
+        public async Task Update(CommentDynamo commentDynamo)
+        {
+            await _context.SaveAsync<CommentDynamo>(commentDynamo);
         }
     }
 }

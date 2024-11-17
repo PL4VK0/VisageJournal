@@ -34,7 +34,7 @@ namespace WindowsForms
             VJ.userOptions.UpVotePost(post);
             Refresh();
         }
-        private void Refresh()
+        private async Task Refresh()
         {
             dgvPostComments.DataSource = null;
             if (post.UpVotes.Contains(VJ.userOptions.GetUser().UserID))
@@ -51,11 +51,11 @@ namespace WindowsForms
 
 
 
-            List<Comment> postComments;
+            IEnumerable<Comment> postComments;
             if (ascOrders)
-                postComments = VJ.userOptions.GetAllCommentsFromThisPost(post).OrderBy(c => c.Date).ToList();
-            else 
-                postComments = VJ.userOptions.GetAllCommentsFromThisPost(post).OrderByDescending(c => c.Date).ToList();
+                postComments = (await VJ.userOptions.GetAllCommentsFromThisPost(post)).OrderBy(c=>c.Date);
+            else
+                postComments = (await VJ.userOptions.GetAllCommentsFromThisPost(post)).OrderByDescending(c => c.Date);
             dgvPostComments.DataSource = new BindingSource { DataSource = postComments };
             dgvPostComments.Columns["CommentID"].Visible = false;
             dgvPostComments.Columns["Date"].Visible = false;

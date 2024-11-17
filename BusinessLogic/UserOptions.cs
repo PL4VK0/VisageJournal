@@ -1,9 +1,11 @@
 ﻿
+using Converter;
 using DALdynamoDB.Beton;
 using DALmongoDB.Beton;
 using DALneo4j;
 using DALneo4j.Beton;
 using DTO;
+using MongoDB.Bson;
 using MongoDB.Driver;
 namespace BusinessLogic
 {
@@ -266,33 +268,38 @@ namespace BusinessLogic
         }
         //---------------------------------------------------------------------------------------------------
         //comment related stuff
-        public async Task NewCommentFromThisUserAsync(Comment comment)
+        public async Task NewCommentFromThisUser(Comment comment)
         {
             commentDAL.Add(comment);
-            await commentDALdynamo.Add(comment);
+            await commentDALdynamo.Add(DynamoConverter.ConvertCommentToCommentDynamo(comment));
         }
-        public List<Comment> GetAllCommentsFromThisPost(Post post)
+        public async Task<IEnumerable<Comment>> GetAllCommentsFromThisPost(Post post)
         {
-            var filter = Builders<Comment>.Filter.Eq(c => c.PostID, post.PostID);
-            return commentCollection.Find(filter).ToList();
+            var commentsDynamo = await commentDALdynamo.GetAllFromPost(post.PostID);
+            List<Comment> comments = new List<Comment>();
+            foreach (var comment in commentsDynamo)
+                comments.Add(DynamoConverter.ConvertCommentDynamoToComment(comment));
+            return comments;
         }
-        public void UpVoteComment(Comment comment)
+        public async void UpVoteComment(Comment comment)
         {
             var filter = Builders<Comment>.Filter.Eq(c => c.CommentID, comment.CommentID);
             comment.UpVotes.Add(user.UserID);
             var updateComment = Builders<Comment>.Update
                 .Set(c => c.UpVotes, comment.UpVotes);
             commentCollection.UpdateOne(filter, updateComment);
+            await commentDALdynamo.Update(DynamoConverter.ConvertCommentToCommentDynamo(comment));
         }
-        public void DownVoteComment(Comment comment)
+        public async void DownVoteComment(Comment comment)
         {
             var filter = Builders<Comment>.Filter.Eq(c => c.CommentID, comment.CommentID);
             comment.DownVotes.Add(user.UserID);
             var updateComment = Builders<Comment>.Update
                 .Set(c => c.DownVotes, comment.DownVotes);
             commentCollection.UpdateOne(filter, updateComment);
+            await commentDALdynamo.Update(DynamoConverter.ConvertCommentToCommentDynamo(comment));
         }
-        public void RemoveCommentUpVote(Comment comment)
+        public async void RemoveCommentUpVote(Comment comment)
         {
             comment.UpVotes.Remove(user.UserID);
 
@@ -301,20 +308,22 @@ namespace BusinessLogic
             var updateComment = Builders<Comment>.Update
                 .Set(c => c.UpVotes, comment.UpVotes);
             commentCollection.UpdateOne(filter, updateComment);
+            await commentDALdynamo.Update(DynamoConverter.ConvertCommentToCommentDynamo(comment));
         }
-        public void RemoveCommentDownVote(Comment comment)
+        public async void RemoveCommentDownVote(Comment comment)
         {
             comment.DownVotes.Remove(user.UserID);
             var filter = Builders<Comment>.Filter.Eq(c => c.CommentID, comment.CommentID);
             var updateComment = Builders<Comment>.Update.Set(c => c.DownVotes, comment.DownVotes);
 
             commentCollection.UpdateOne(filter, updateComment);
+            await commentDALdynamo.Update(DynamoConverter.ConvertCommentToCommentDynamo(comment));
         }
         public async Task RemoveCommentAsync(Comment comment)
         {
             var filter = Builders<Comment>.Filter.Eq(c => c.CommentID, comment.CommentID);
             commentCollection.DeleteOne(filter);
-            await commentDALdynamo.Delete(comment);
+            await commentDALdynamo.Delete(comment.PostID,comment.CommentID);
         }
         public async Task UpdateComment(Comment comment)
         {
@@ -323,7 +332,7 @@ namespace BusinessLogic
                 .Set(c=>c.CommentText, comment.CommentText)
                 .Set(c=>c.Date, comment.Date);
             commentCollection.UpdateOne(filter, updateComment);
-            await commentDALdynamo.Update(comment);
+            await commentDALdynamo.Update(DynamoConverter.ConvertCommentToCommentDynamo(comment));
         }
     }
 }

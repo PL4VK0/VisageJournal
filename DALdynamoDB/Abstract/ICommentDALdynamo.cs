@@ -9,8 +9,9 @@ namespace DALdynamoDB.Abstract
 {
     public interface ICommentDALdynamo
     {
-        Task Update(Comment comment);
-        Task Delete(Comment comment);
-        Task Add(Comment comment);
+        Task Update(CommentDynamo commentDynamo);
+        Task Delete(string postID, string commentID);
+        Task Add(CommentDynamo commentDynamo);
+        Task<IEnumerable<CommentDynamo>> GetAllFromPost(string postID);
     }
 }

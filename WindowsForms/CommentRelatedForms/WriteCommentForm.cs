@@ -16,7 +16,7 @@ namespace WindowsForms.CommentRelatedForms
             lblUsersPost.Text = post.PosterUserName + "'s Post (" + post.PostTitle + ")";
         }
 
-        private void btnEndAddComment_Click(object sender, EventArgs e)
+        private async void btnEndAddComment_Click(object sender, EventArgs e)
         {
             string commentText = richTextBoxCommentText.Text;
             Comment comment = new Comment();
@@ -24,7 +24,7 @@ namespace WindowsForms.CommentRelatedForms
             comment.CommentText = commentText;
             comment.CommentatorUserName = VJ.userOptions.GetUser().UserName;
             comment.PosterUserName = post.PosterUserName;
-            VJ.userOptions.NewCommentFromThisUserAsync(comment);
+            await VJ.userOptions.NewCommentFromThisUser(comment);
             MessageBox.Show("Commented Successfully!");
             Close();
         }
